@@ -1,0 +1,84 @@
+{
+    "tako oefentherapie Mensendieck": {
+        "naam": "tako oefentherapie Mensendieck",
+        "naam code": 3241110,
+        "Aantal Dossiers": 2,
+        "Aantal Therapeuten": 1,
+        "Dossier per Therapeut": 2.0,
+        "Praktijktoets": 1.0,
+        "Dossiertoets": 0.9166666666666666,
+        "2 Meetintrumenten": 1.0,
+        "GPE": 0.0,
+        "StartBack": 1.0,
+        "email": "tako.oefentherapie@gmail.com",
+        "bezoekende therapeut code": "287910801",
+        "bezoekende prakijk": 2879108,
+        "Item 2 t/m 7": 2,
+        "door de juiste bezocht": true,
+        "dossierstoets": 0,
+        "dossier_info": {
+            "patient 1": {
+                "2 meetintrumenten": true,
+                "2 meetintrumenten data": {
+                    "VAS-P": 2,
+                    "PSK": 2,
+                    "NRS": 0,
+                    "QBPDS": 2,
+                    "StartBack": 2,
+                    "GPE": 0,
+                    "Anders": 0
+                },
+                "StartBack": true,
+                "GPE": false,
+                "aantal behandelingen": "10",
+                "Dossiertoets score": 0.9166666666666666,
+                "Dossiertoets data": {
+                    "Zijn de verwijsgegevens aanwezig in het dossier?": true,
+                    "Is de conclusie van de screening aanwezig?": true,
+                    "Is de hulpvraag van de pati\u00ebnt vastgelegd?": true,
+                    "Zijn alle domeinen van de ICF beoordeeld binnen het diagnostisch proces?": false,
+                    "Is de oefen/ fysiotherapeutische diagnose aanwezig?": true,
+                    "Is er een behandeldoel vastgelegd? (concreet, meetbaar, eventueel SMART)": true,
+                    "Is het behandelplan opgesteld?": true,
+                    "Is er in het behandelplan rekening gehouden met de uitslag van de STarT Back Screening Tool? ": true,
+                    "Voldoet het dossier aan de minimale-klinimetrie eisen van 2 volledig ingevulde meetinstrumenten naast de STarT Back ?": true,
+                    "Wordt er op systematische wijze gebruik gemaakt van klinimetrie?": true,
+                    "Wordt er ge\u00ebvalueerd op de gestelde behandeldoelen en indien nodig bijgesteld?": true,
+                    "Is er, kijkend naar de dagjournaals, een systematiek in het therapeutisch handelen terug te vinden?": true
+                }
+            },
+            "patient 2": {
+                "2 meetintrumenten": true,
+                "2 meetintrumenten data": {
+                    "VAS-P": 2,
+                    "PSK": 2,
+                    "NRS": 0,
+                    "QBPDS": 2,
+                    "StartBack": 2,
+                    "GPE": 0,
+                    "Anders": 0
+                },
+                "StartBack": true,
+                "GPE": false,
+                "aantal behandelingen": "11",
+                "Dossiertoets score": 0.9166666666666666,
+                "Dossiertoets data": {
+                    "Zijn de verwijsgegevens aanwezig in het dossier?": true,
+                    "Is de conclusie van de screening aanwezig?": true,
+                    "Is de hulpvraag van de pati\u00ebnt vastgelegd?": true,
+                    "Zijn alle domeinen van de ICF beoordeeld binnen het diagnostisch proces?": false,
+                    "Is de oefen/ fysiotherapeutische diagnose aanwezig?": true,
+                    "Is er een behandeldoel vastgelegd? (concreet, meetbaar, eventueel SMART)": true,
+                    "Is het behandelplan opgesteld?": true,
+                    "Is er in het behandelplan rekening gehouden met de uitslag van de STarT Back Screening Tool? ": true,
+                    "Voldoet het dossier aan de minimale-klinimetrie eisen van 2 volledig ingevulde meetinstrumenten naast de STarT Back ?": true,
+                    "Wordt er op systematische wijze gebruik gemaakt van klinimetrie?": true,
+                    "Wordt er ge\u00ebvalueerd op de gestelde behandeldoelen en indien nodig bijgesteld?": true,
+                    "Is er, kijkend naar de dagjournaals, een systematiek in het therapeutisch handelen terug te vinden?": true
+                }
+            }
+        },
+        "punten_per_therapeut": 1.0,
+        "catagorie": "Groen"
+    }
+}
