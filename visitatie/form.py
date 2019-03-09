@@ -5,7 +5,6 @@ class Form(object):
     def __init__(self, pd_serie, path):
         self.path = path
         self.dct = dict(pd_serie)
-        # TODO get basic info {"Aantal Therapeuten"}
         self.get_basic_info()
 
     def get_basic_info(self):
@@ -40,6 +39,8 @@ class Form(object):
         ):
             if email == str(line.split(",")[1]):
                 return int(line.split(",")[3])
+
+        raise FileNotFoundError(email)
 
 
 def lines_from_csv_file(file):
