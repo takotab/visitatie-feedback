@@ -18,7 +18,6 @@ class Form(object):
         self.bezoekende_therapeut = self.find_inschrijving_info_code(
             code=str(self.bezoekende_therapeut_code)[:-2]
         )["naam"]
-        
 
     def find_inschrijving_info_code(self, code=None):
         if code is None:
