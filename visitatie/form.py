@@ -26,6 +26,6 @@ class Form(object):
                     splited_line[8:] = splited_line[9:]
 
                 assert len(splited_line) == 10, splited_line
-                if splited_line[5] == code:
+                if splited_line[5] == str(code):
                     return {"naam": splited_line[7], "email": splited_line[9]}
         raise FileNotFoundError(code)
