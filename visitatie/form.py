@@ -40,6 +40,8 @@ class Form(object):
             if email == str(line.split(",")[1]):
                 return int(line.split(",")[3])
 
+        raise FileNotFoundError(email)
+
 
 def lines_from_csv_file(file):
     with open(file) as f:
