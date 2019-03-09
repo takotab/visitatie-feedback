@@ -5,7 +5,6 @@ class Form(object):
     def __init__(self, pd_serie, path):
         self.path = path
         self.dct = dict(pd_serie)
-        # TODO get basic info {"Aantal Therapeuten"}
         self.get_basic_info()
 
     def get_basic_info(self):
@@ -13,7 +12,7 @@ class Form(object):
         inschrijving_gegevens = self.find_inschrijving_info_code()
         self.naam = inschrijving_gegevens["naam"]
         self.email = inschrijving_gegevens["email"]
-        self.aantal_therapeuten = None
+        self.aantal_therapeuten = self.find_aantal_therapeuten()
         self.bezoekende_therapeut_code = self.dct["Therapeutcode bezoekende therapeut?"]
         self.bezoekende_therapeut = self.find_inschrijving_info_code(
             code=str(self.bezoekende_therapeut_code)[:-2]
@@ -30,6 +29,16 @@ class Form(object):
                 return {"naam": splited_line[7], "email": splited_line[9]}
 
         raise FileNotFoundError(code)
+
+    def find_aantal_therapeuten(self, email: str = None):
+        if email is None:
+            email = self.email
+
+        for line in lines_from_csv_file(
+            os.path.join(self.path, "inschrijven_visitatie_2018.csv")
+        ):
+            if email == str(line.split(",")[1]):
+                return int(line.split(",")[3])
 
 
 def lines_from_csv_file(file):
