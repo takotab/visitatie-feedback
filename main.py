@@ -16,7 +16,6 @@ args = parser.parse_args()
 
 def main(map):
     
-    # TODO check door de juiste bezocht
     # TODO get parktijk toets result
     # TODO extract patient x as dict
     # TODO 2 meetinstumenten
