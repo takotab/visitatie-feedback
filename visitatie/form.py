@@ -1,3 +1,4 @@
+import pdb
 import os
 
 
@@ -5,6 +6,7 @@ class Form(object):
     def __init__(self, pd_serie, path):
         self.path = path
         self.dct = dict(pd_serie)
+        self.door_de_juiste_bezocht = False
         self.get_basic_info()
 
     def get_basic_info(self):
@@ -14,6 +16,7 @@ class Form(object):
         self.email = inschrijving_gegevens["email"]
         self.aantal_therapeuten = self.find_aantal_therapeuten()
         self.bezoekende_therapeut_code = self.dct["Therapeutcode bezoekende therapeut?"]
+        self.check_door_de_juist_bezocht(inschrijving_gegevens["planned_b_praktijk"])
         self.bezoekende_therapeut = self.find_inschrijving_info_code(
             code=str(self.bezoekende_therapeut_code)[:-2]
         )["naam"]
@@ -26,7 +29,11 @@ class Form(object):
             splited_line = fix_length(line.split(","))
 
             if splited_line[5] == str(code):
-                return {"naam": splited_line[7], "email": splited_line[9]}
+                return {
+                    "naam": splited_line[7],
+                    "email": splited_line[9],
+                    "planned_b_praktijk": splited_line[6],
+                }
 
         raise FileNotFoundError(code)
 
@@ -41,6 +48,16 @@ class Form(object):
                 return int(line.split(",")[3])
 
         raise FileNotFoundError(email)
+
+    def check_door_de_juist_bezocht(self, planned_b_praktijk):
+        self.door_de_juiste_bezocht = (
+            str(self.bezoekende_therapeut_code)[:-2] == planned_b_praktijk
+        )
+        if not self.door_de_juiste_bezocht:
+            print(
+                f"WARNING:{self.naam} is niet door de juiste bezocht./n{self.bezoekende_therapeut_code} is not {planned_b_praktijk}"
+            )
+            # pdb.set_trace()
 
 
 def lines_from_csv_file(file):
