@@ -18,3 +18,8 @@ def test_not_juiste_bezocht():
     a_form.check_door_de_juist_bezocht(str(a_form.bezoekende_therapeut_code) + "08")
     assert not a_form.door_de_juiste_bezocht
 
+
+def test_juiste_bezocht_int():
+    a_form = visitatie.get_data(i=0)
+    a_form.check_door_de_juist_bezocht(int(a_form.bezoekende_therapeut_code))
+    assert a_form.door_de_juiste_bezocht
