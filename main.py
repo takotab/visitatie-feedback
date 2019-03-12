@@ -2,6 +2,7 @@ import argparse
 import os
 import logging
 
+import visitatie
 
 parser = argparse.ArgumentParser(description="Handeling the results of the visitatie.")
 
@@ -18,7 +19,6 @@ def main(map):
     a_form = visitatie.get_data(i=0)
     visitatie.get_colour(a_form)
 
-    # TODO Check num of patienten vs expected
     # TODO Dossiertoets
     # TODO 2 meetinstumenten
     # TODO STartBack/GPE
