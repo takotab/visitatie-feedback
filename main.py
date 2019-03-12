@@ -15,12 +15,14 @@ args = parser.parse_args()
 
 
 def main(map):
-    # TODO get num of patients
-    # TODO extract patient x as dict
+    a_form = visitatie.get_data(i=0)
+    a_form.praktijktoets()
+    
+
+    # TODO Check num of patienten vs expected
+    # TODO Dossiertoets
     # TODO 2 meetinstumenten
     # TODO STartBack/GPE
-    # TODO Dossiertoets
-    # TODO Check num of patienten vs expected
     # TODO Save praktijk_dict as json
     # TODO make pdf rapport
     pass

@@ -1,5 +1,6 @@
 import pdb
 import os
+from visitatie.praktijktoets import praktijk_toets
 
 
 class Form(object):
@@ -68,6 +69,9 @@ class Form(object):
         for key in keys:
             result[key] = self.dct[key]
         return result
+
+    def praktijk_toets(self, **kwargs):
+        self.praktijktoets = praktijk_toets(self, **kwargs)
 
 
 def therapeut_2_praktijk_code(code):
