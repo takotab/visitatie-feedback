@@ -16,19 +16,22 @@ class Form(object):
         self.email = inschrijving_gegevens["email"]
         self.aantal_therapeuten = self.find_aantal_therapeuten()
         self.bezoekende_therapeut_code = self.dct["Therapeutcode bezoekende therapeut?"]
+        self.bezoekende_praktijk = therapeut_2_praktijk_code(
+            self.bezoekende_therapeut_code
+        )
         self.check_door_de_juist_bezocht(inschrijving_gegevens["planned_b_praktijk"])
         self.bezoekende_therapeut = self.find_inschrijving_info_code(
-            code=str(self.bezoekende_therapeut_code)[:-2]
+            code=self.bezoekende_praktijk
         )["naam"]
 
     def find_inschrijving_info_code(self, code=None):
         if code is None:
             code = self.praktijk_code
-
+        code = therapeut_2_praktijk_code(code)
         for line in lines_from_csv_file(os.path.join(self.path, "gegevens.csv")):
             splited_line = fix_length(line.split(","))
 
-            if splited_line[5] == str(code):
+            if splited_line[5] == code:
                 return {
                     "naam": splited_line[7],
                     "email": splited_line[9],
@@ -50,14 +53,25 @@ class Form(object):
         raise FileNotFoundError(email)
 
     def check_door_de_juist_bezocht(self, planned_b_praktijk):
-        self.door_de_juiste_bezocht = (
-            str(self.bezoekende_therapeut_code)[:-2] == planned_b_praktijk
-        )
+        self.door_de_juiste_bezocht = self.bezoekende_praktijk == planned_b_praktijk
         if not self.door_de_juiste_bezocht:
             print(
                 f"WARNING:{self.naam} is niet door de juiste bezocht./n{self.bezoekende_therapeut_code} is not {planned_b_praktijk}"
             )
             # pdb.set_trace()
+
+    def get_keys(self, keys: list):
+        result = {}
+        for key in keys:
+            result[key] = self.dct[key]
+        return result
+
+
+def therapeut_2_praktijk_code(code):
+    code = str(code)
+    if len(code) > 7:
+        code = code[:7]
+    return code
 
 
 def lines_from_csv_file(file):
