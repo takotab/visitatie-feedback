@@ -49,10 +49,13 @@ def test_get_keys():
     assert len(result) == 2
 
 
+@pytest.mark.raises(exception=KeyError)
 def test_not_get_keys():
     a_form = visitatie.get_data(i=0)
-    try:
-        result = a_form.get_keys(["ipsus lorum", "Therapeutcode bezoekende therapeut?"])
-        assert False
-    except KeyError as e:
-        assert True
+    result = a_form.get_keys(["ipsus lorum", "Therapeutcode bezoekende therapeut?"])
+
+
+def test_empty_keys():
+    a_form = visitatie.get_data(i=0)
+    all_keys = a_form.get_keys()
+    assert all_keys == list(a_form.dct.keys())

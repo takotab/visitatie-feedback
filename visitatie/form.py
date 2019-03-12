@@ -7,6 +7,7 @@ class Form(object):
         self.path = path
         self.dct = dict(pd_serie)
         self.door_de_juiste_bezocht = False
+        self.patients = {"last_patient": "Unknown"}
         self.get_basic_info()
 
     def get_basic_info(self):
@@ -60,7 +61,9 @@ class Form(object):
             )
             # pdb.set_trace()
 
-    def get_keys(self, keys: list):
+    def get_keys(self, keys: list = None):
+        if keys is None:
+            return list(self.dct.keys())
         result = {}
         for key in keys:
             result[key] = self.dct[key]
