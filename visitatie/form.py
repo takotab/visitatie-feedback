@@ -1,6 +1,4 @@
-import pdb
 import os
-from visitatie.praktijktoets import praktijk_toets
 
 
 class Form(object):
@@ -70,8 +68,14 @@ class Form(object):
             result[key] = self.dct[key]
         return result
 
-    def praktijk_toets(self, **kwargs):
-        self.praktijktoets = praktijk_toets(self, **kwargs)
+    def _check_num_patients(self):
+        if self.patients["last_patient"] == "Unknown":
+            raise NotImplementedError()
+
+        self.dossier_per_therapeut = (
+            self.patients["last_patient"] / self.aantal_therapeuten
+        )
+        return self.dossier_per_therapeut
 
 
 def therapeut_2_praktijk_code(code):

@@ -59,3 +59,4 @@ def test_empty_keys():
     a_form = visitatie.get_data(i=0)
     all_keys = a_form.get_keys()
     assert all_keys == list(a_form.dct.keys())
+

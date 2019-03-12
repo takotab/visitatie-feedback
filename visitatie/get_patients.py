@@ -3,13 +3,13 @@ from visitatie.form import Form
 from visitatie._patient_question_file import *
 
 
-def get_patients(form: Form):
+def get_data_from_all_patients(form: Form):
     last = False
     i = 0
     while not last:
         last = get_patient_data(form, i, is_last=True)
         i += 1
-
+    form._check_num_patients()
     return form.patients
 
 

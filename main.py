@@ -16,8 +16,7 @@ args = parser.parse_args()
 
 def main(map):
     a_form = visitatie.get_data(i=0)
-    a_form.praktijktoets()
-    
+    visitatie.get_colour(a_form)
 
     # TODO Check num of patienten vs expected
     # TODO Dossiertoets

@@ -16,7 +16,7 @@ def test_get_patient():
     ] = 00
     assert visitatie.get_patient_data(a_form, 0) == patient_data
 
-    patient_data = visitatie.get_patients(a_form)
+    patient_data = visitatie.get_data_from_all_patients(a_form)
     assert set(list(patient_data.keys())) == set([0, 1, "last_patient"])
     assert patient_data["last_patient"] == 1
 
@@ -26,5 +26,5 @@ def test_get_patient():
 @pytest.mark.raises(exception=KeyError)
 def test_get_patient_error():
     a_form = visitatie.get_data(i=0)
-    _ = visitatie.get_patients(a_form)
+    _ = visitatie.get_data_from_all_patients(a_form)
     visitatie.get_patient_data(a_form, 3)
