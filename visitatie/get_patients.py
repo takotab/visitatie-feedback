@@ -1,6 +1,10 @@
 import os
 from visitatie.form import Form
-from visitatie._patient_question_file import *
+from visitatie._patient_question_file import (
+    get_patient_questions,
+    make_patient_question_file,
+    read_patient_question_file,
+)
 
 
 def get_data_from_all_patients(form: Form):
