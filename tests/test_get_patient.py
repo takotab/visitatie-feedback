@@ -1,4 +1,6 @@
 import os
+import pytest
+
 import visitatie
 
 
@@ -19,3 +21,10 @@ def test_get_patient():
     assert patient_data["last_patient"] == 1
 
     os.remove(test_f)
+
+
+@pytest.mark.raises(exception=KeyError)
+def test_get_patient_error():
+    a_form = visitatie.get_data(i=0)
+    _ = visitatie.get_patients(a_form)
+    visitatie.get_patient_data(a_form, 3)
