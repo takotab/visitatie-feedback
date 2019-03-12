@@ -67,6 +67,9 @@ def make_patient_question_file(form: Form):
     with open(patient_question_file, "w") as f:
         for q in patient_questions:
             f.write(q + "\n")
+    print(
+        f"made new patient question file. Saved at {patient_question_file}.\nWith {len(patient_questions)} questions."
+    )
     return patient_questions
 
 

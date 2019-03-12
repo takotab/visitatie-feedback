@@ -3,10 +3,9 @@ import visitatie
 
 
 def test_get_patient():
-    test_f = "visitatie/patient_questions_pytest.txt"
+    test_f = "visitatie/patient_questions.txt"
     if os.path.exists(test_f):
         os.remove(test_f)
-    visitatie.get_patients.patient_question_file = test_f
 
     a_form = visitatie.get_data(i=0)
     patient_data = visitatie.get_patient_data(a_form, 0)
