@@ -15,7 +15,7 @@ args = parser.parse_args()
 
 
 def main(map):
-    
+    # TODO get num of patients
     # TODO extract patient x as dict
     # TODO 2 meetinstumenten
     # TODO STartBack/GPE
