@@ -2,10 +2,16 @@ import visitatie
 import pytest
 
 
-# def test_form_find_inschrijving():
-#     f = visitatie.get_data(0)
-#     with pytest.raises(FileExistsError):
-#         f.find_inschrijving_info_code(code=100)
+@pytest.mark.raises(exception=FileNotFoundError)
+def test_form_find_inschrijving_error():
+    f = visitatie.get_data(0)
+    f.find_inschrijving_info_code(code=100)
+
+
+@pytest.mark.raises(exception=FileNotFoundError)
+def test_form_aantal_therapeuten_error():
+    f = visitatie.get_data(0)
+    f.find_aantal_therapeuten(email="abcdefghij@gma1l.c0m")
 
 
 def test_fix_length():
