@@ -1,3 +1,4 @@
+import os
 import pytest
 import visitatie
 
@@ -9,3 +10,7 @@ def test_get_data():
     assert a_form.aantal_therapeuten == 2
     assert a_form.door_de_juiste_bezocht
 
+
+# def test_checkfile():
+#     f = os.path.join("data_fake", "visitatie_form.csv")
+#     f_new = visitatie.get_data.checkfile(f)
