@@ -8,12 +8,15 @@ path = "data_real"
 
 def get_data(i=0, path="data_fake"):
     f = os.path.join(path, "visitatie_form.csv")
-    # f = checkfile(f)
+    f = checkfile(f)
     df = pd.read_csv(f)
     return Form(df.iloc[i, :], path)
 
 
-def checkfile(f_path: str):
+def checkfile(f_path: str, debug=False):
+    if not debug and os.path.exists(new_file_name(f_path)):
+        return new_file_name(f_path)
+
     adjusted = False
     new_file = ""
     with open(f_path, "r") as f:

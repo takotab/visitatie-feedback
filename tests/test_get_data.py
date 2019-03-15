@@ -13,9 +13,21 @@ def test_get_data():
 
 def test_checkfile():
     f = os.path.join("data_fake", "visitatie_form.csv")
+    f_new = visitatie.get_form_data.checkfile(f, debug=True)
+    check_in_file(f_new)
+    f_new2 = visitatie.get_form_data.checkfile(f_new, debug=True)
+    assert f_new == f_new2
+
+
+def test_checkfile_not_debug():
+    f = os.path.join("data_fake", "visitatie_form.csv")
     f_new = visitatie.get_form_data.checkfile(f)
-    check_in_file(
-        f_new,
+    check_in_file(f_new)
+
+
+def check_in_file(f: str):
+    _check_in_file(
+        f,
         should_be_s=[
             "STarT Back Screening Tool,",
             "PSK 1,PSK 1_end",
@@ -32,12 +44,9 @@ def test_checkfile():
             "NRS,NRS,",
         ],
     )
-    f_new2 = visitatie.get_form_data.checkfile(f_new)
-    assert f_new == f_new2
-    os.remove(f_new)
 
 
-def check_in_file(f: str, should_be_s: [str], should_not_be_s: [str]):
+def _check_in_file(f: str, should_be_s: [str], should_not_be_s: [str]):
     with open(f, "r") as f:
         for line in f:
             for should_be in should_be_s:

@@ -7,5 +7,6 @@ def test_twee_meetinstrumenten():
     _twee_meetinstrumenten = visitatie.toetsen._twee_meetinstrumenten(
         a_form.patients[0]
     )
-    assert _twee_meetinstrumenten == {"twee_meetinstrumenten": 0.25}
+    assert _twee_meetinstrumenten["num_meetinstrumenten_used"] == 4
+    assert _twee_meetinstrumenten["num_start_end"] == 2
 
