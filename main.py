@@ -19,7 +19,6 @@ def main(map):
     a_form = visitatie.get_data(i=0)
     visitatie.get_colour(a_form)
 
-    # TODO Dossiertoets
     # TODO 2 meetinstumenten
     # TODO STartBack/GPE
     # TODO Save praktijk_dict as json
