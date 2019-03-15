@@ -23,8 +23,23 @@ def test_get_patient():
     os.remove(test_f)
 
 
+def test_get_patient_2():
+    test_f = "visitatie/patient_questions.txt"
+    if os.path.exists(test_f):
+        os.remove(test_f)
+
+    a_form = visitatie.get_data(i=1)
+    _ = visitatie.get_data_from_all_patients(a_form)
+
+
 @pytest.mark.raises(exception=KeyError)
 def test_get_patient_error():
     a_form = visitatie.get_data(i=0)
     _ = visitatie.get_data_from_all_patients(a_form)
     visitatie.get_patient_data(a_form, 3)
+
+
+@pytest.mark.raises(exception=FileExistsError)
+def test_get_patient_3_error():
+    a_form = visitatie.get_data(i=2)
+    _ = visitatie.get_data_from_all_patients(a_form)

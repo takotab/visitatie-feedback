@@ -51,5 +51,7 @@ def check_this_is_last(form: Form, i: int):
 
 
 def make_addition(i: int):
+    if i > 11:
+        raise FileExistsError(f"Only 12 patients now attemting to acces patient 13")
     return "." + str(i) if i > 0 else ""
 

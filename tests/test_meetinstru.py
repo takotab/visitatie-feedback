@@ -10,3 +10,9 @@ def test_twee_meetinstrumenten():
     assert _twee_meetinstrumenten["num_meetinstrumenten_used"] == 4
     assert _twee_meetinstrumenten["num_start_end"] == 2
 
+
+def test_twee_meetinstrumenten_patients():
+    a_form = visitatie.get_data(i=1)
+    _ = visitatie.get_data_from_all_patients(a_form)
+    visitatie.get_meetinstrumenten(a_form)
+
