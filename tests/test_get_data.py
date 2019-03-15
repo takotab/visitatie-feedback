@@ -32,8 +32,8 @@ def test_checkfile():
             "NRS,NRS,",
         ],
     )
-    # f_new2 = visitatie.get_form_data.checkfile(f_new)
-    # assert f_new == f_new2
+    f_new2 = visitatie.get_form_data.checkfile(f_new)
+    assert f_new == f_new2
     os.remove(f_new)
 
 
