@@ -2,7 +2,7 @@ import numpy as np
 from visitatie.utils import remove_additions
 
 
-def _twee_meetinstrumenten(antworden: dict, i: int, meetinstrumenten_q: dict):
+def _meetinstrumenten(antworden: dict, i: int, meetinstrumenten_q: dict):
     antworden = remove_additions(antworden, i)
     result = {}
     for instrument, instrument_qs in meetinstrumenten_q.items():

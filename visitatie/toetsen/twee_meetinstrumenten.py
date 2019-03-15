@@ -1,4 +1,4 @@
-from visitatie.toetsen._twee_meetinstrumenten_utils import _twee_meetinstrumenten
+from visitatie.toetsen.meetinstrumenten_utils import _meetinstrumenten
 from visitatie.form import Form
 
 meetinstrumenten_q = {
@@ -20,7 +20,7 @@ meetinstrumenten_q = {
 def get_meetinstrumenten(form: Form):
     result = {}
     for i in range(form.patients["last_patient"]):
-        result[i] = _twee_meetinstrumenten(form.patients[i], i, meetinstrumenten_q)
+        result[i] = _meetinstrumenten(form.patients[i], i, meetinstrumenten_q)
     result = get_patient_stats(result)
     return result
 
