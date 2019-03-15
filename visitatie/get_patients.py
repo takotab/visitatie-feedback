@@ -5,7 +5,7 @@ from visitatie._patient_question_file import (
     make_patient_question_file,
     read_patient_question_file,
 )
-
+from visitatie.utils import make_addition
 
 def get_data_from_all_patients(form: Form):
     last = False
@@ -48,10 +48,4 @@ def check_this_is_last(form: Form, i: int):
         form.patients["last_patient"] = i
         return True
     return False
-
-
-def make_addition(i: int):
-    if i > 11:
-        raise FileExistsError(f"Only 12 patients now attemting to acces patient 13")
-    return "." + str(i) if i > 0 else ""
 

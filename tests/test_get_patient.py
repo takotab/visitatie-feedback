@@ -30,6 +30,7 @@ def test_get_patient_2():
 
     a_form = visitatie.get_data(i=1)
     _ = visitatie.get_data_from_all_patients(a_form)
+    assert a_form.patients["last_patient"] == 3
 
 
 @pytest.mark.raises(exception=KeyError)

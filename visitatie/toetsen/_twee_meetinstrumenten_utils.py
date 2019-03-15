@@ -1,5 +1,5 @@
 import numpy as np
-
+from visitatie.utils import remove_additions
 
 meetinstrumenten_q = {
     "VAS": [
@@ -18,7 +18,8 @@ meetinstrumenten_q = {
 # STarT Back Screening Tool,STarT Back Screening Tool_end,GPE1,GPE2
 
 
-def _twee_meetinstrumenten(antworden: dict):
+def _twee_meetinstrumenten(antworden: dict, i: int):
+    antworden = remove_additions(antworden, i)
     result = {}
     for instrument, instrument_qs in meetinstrumenten_q.items():
         instrument_a = {key: antworden[key] for key in instrument_qs}
@@ -41,6 +42,7 @@ def _instrument(antworden: dict):
 def modify_anders(instrument, instrument_a):
     if instrument == "Anders":
         instrument = instrument_a["Welk ander meetinstrument gebruikt u?"]
+        instrument = instrument if type(instrument) == str else "Anders"
         del instrument_a["Welk ander meetinstrument gebruikt u?"]
     return instrument, instrument_a
 
