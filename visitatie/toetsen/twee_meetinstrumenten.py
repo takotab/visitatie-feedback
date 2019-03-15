@@ -1,4 +1,4 @@
-from visitatie._twee_meetinstrumenten_utils import _twee_meetinstrumenten
+from visitatie.toetsen._twee_meetinstrumenten_utils import _twee_meetinstrumenten
 from visitatie.form import Form
 
 
@@ -13,5 +13,4 @@ def get_meetinstrumenten(form: Form):
 def get_patient_stats(result: dict):
 
     return result
-
 
