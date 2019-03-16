@@ -60,6 +60,7 @@ class Form(object):
                 f"WARNING:{self.naam} is niet door de juiste bezocht./n{self.bezoekende_therapeut_code} is not {planned_b_praktijk}"
             )
             # pdb.set_trace()
+        self.toetsen["door_de_juiste_bezocht"] = self.door_de_juiste_bezocht
 
     def get_keys(self, keys: list = None):
         if keys is None:
