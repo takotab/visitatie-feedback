@@ -3,8 +3,6 @@ import os
 
 from visitatie.form import Form
 
-path = "data_real"
-
 
 def get_data(i=0, path="data_fake"):
     f = os.path.join(path, "visitatie_form.csv")

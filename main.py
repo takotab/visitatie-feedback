@@ -7,7 +7,7 @@ import visitatie
 parser = argparse.ArgumentParser(description="Handeling the results of the visitatie.")
 
 parser.add_argument(
-    "--map",
+    "--dir",
     default="data_real",
     type=str,
     help="Select the map to be used for making the results.",
@@ -15,9 +15,11 @@ parser.add_argument(
 args = parser.parse_args()
 
 
-def main(map):
-    for i in range(10):
-        a_form = visitatie.get_data(i=0)
+def main(dir):
+    for i in range(3, 10):
+        a_form = visitatie.get_data(i=i, path=dir)
+        if a_form.bezoekende_therapeut_code == 999999901:
+            break
         print(i, visitatie.get_color(a_form))
 
     # TODO Save praktijk_dict as json
@@ -26,4 +28,4 @@ def main(map):
 
 
 if __name__ == "__main__":
-    main(args.map)
+    main(args.dir)

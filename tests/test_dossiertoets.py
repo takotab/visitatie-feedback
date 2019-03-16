@@ -14,3 +14,11 @@ def test_get_dossiertoets():
     _dossiertoets = visitatie.toetsen.get_dossier_toets(a_form)
     assert _dossiertoets["Dossiertoets"] == 0.25
 
+
+def test_get_dossiertoets_2():
+    a_form = visitatie.get_data(i=1)
+    _ = visitatie.get_data_from_all_patients(a_form)
+    _dossiertoets = visitatie.toetsen.get_dossier_toets(a_form)
+    assert _dossiertoets["Dossiertoets"] == 0.375
+    assert len(_dossiertoets["_dossiertoets"]) == 4
+

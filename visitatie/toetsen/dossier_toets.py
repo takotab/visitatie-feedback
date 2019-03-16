@@ -1,11 +1,12 @@
 from visitatie.form import Form
 from visitatie.mean import Mean
+from visitatie.utils import remove_additions
 
 
 def get_dossier_toets(form: Form):
     results = {}
-    for i in range(form.patients["last_patient"]):
-        results[i] = _dossier_toets(form.patients[i])
+    for i in range(form.patients["last_patient"] + 1):
+        results[i] = _dossier_toets(form.patients[i], i)
     return {"_dossiertoets": results, "Dossiertoets": get_stats(results)}
 
 
@@ -32,8 +33,10 @@ dossier_toets_q = [
 ]
 
 
-def _dossier_toets(antworden: dict, negatief="niet aanwezig", niet_van_toepassing=True):
-
+def _dossier_toets(
+    antworden: dict, i: int, negatief="niet aanwezig", niet_van_toepassing=True
+):
+    antworden = remove_additions(antworden, i)
     mean = Mean()
     for item in [antworden[q] for q in dossier_toets_q]:
         if "niet van toepassing" not in item and niet_van_toepassing:
