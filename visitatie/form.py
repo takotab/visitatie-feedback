@@ -20,7 +20,7 @@ class Form(object):
         self.bezoekende_praktijk = therapeut_2_praktijk_code(
             self.bezoekende_therapeut_code
         )
-        self.check_door_de_juist_bezocht(inschrijving_gegevens["planned_b_praktijk"])
+        self.check_door_de_juist_bezocht()
         self.bezoekende_therapeut = self.find_inschrijving_info_code(
             code=self.bezoekende_praktijk
         )["naam"]
@@ -53,7 +53,11 @@ class Form(object):
 
         raise FileNotFoundError(email)
 
-    def check_door_de_juist_bezocht(self, planned_b_praktijk):
+    def check_door_de_juist_bezocht(self, praktijk_code=None):
+        if praktijk_code is None:
+            praktijk_code = self.praktijk_code
+        planned_b_praktijk = find_plan_b_praktijk(praktijk_code, self.path)
+
         self.door_de_juiste_bezocht = self.bezoekende_praktijk == planned_b_praktijk
         if not self.door_de_juiste_bezocht:
             print(
@@ -105,3 +109,13 @@ def fix_length(str_lst: [str]):
         str_lst[8:] = str_lst[9:]
     assert len(str_lst) == 10
     return str_lst
+
+
+def find_plan_b_praktijk(praktijk_code, path):
+    for line in lines_from_csv_file(os.path.join(path, "gegevens.csv")):
+        splited_line = fix_length(line.split(","))
+        if splited_line[6] == str(praktijk_code):
+            return splited_line[5]
+
+    raise FileNotFoundError(praktijk_code)
+

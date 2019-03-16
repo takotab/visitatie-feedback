@@ -21,13 +21,13 @@ def test_fix_length():
 
 def test_not_juiste_bezocht():
     a_form = visitatie.get_data(i=0)
-    a_form.check_door_de_juist_bezocht("08" + str(a_form.bezoekende_therapeut_code))
+    a_form.check_door_de_juist_bezocht(9623113)
     assert not a_form.door_de_juiste_bezocht
 
 
 def test_juiste_bezocht_int():
     a_form = visitatie.get_data(i=0)
-    a_form.check_door_de_juist_bezocht(a_form.bezoekende_praktijk)
+    a_form.check_door_de_juist_bezocht()
     assert a_form.door_de_juiste_bezocht
 
 
@@ -53,6 +53,13 @@ def test_get_keys():
 def test_not_get_keys():
     a_form = visitatie.get_data(i=0)
     result = a_form.get_keys(["ipsus lorum", "Therapeutcode bezoekende therapeut?"])
+
+
+@pytest.mark.raises(exception=FileNotFoundError)
+def test_not_find_plan_b_praktijk():
+    a_form = visitatie.get_data(i=0)
+    a_form.check_door_de_juist_bezocht(96231131)
+    assert not a_form.door_de_juiste_bezocht
 
 
 def test_empty_keys():

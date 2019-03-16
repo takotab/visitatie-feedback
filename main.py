@@ -16,7 +16,7 @@ args = parser.parse_args()
 
 
 def main(dir):
-    for i in range(3, 10):
+    for i in range(4, 10):
         a_form = visitatie.get_data(i=i, path=dir)
         if a_form.bezoekende_therapeut_code == 999999901:
             break
