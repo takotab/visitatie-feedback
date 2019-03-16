@@ -1,5 +1,7 @@
 import os
 
+from visitatie import utils
+
 
 class Form(object):
     def __init__(self, pd_serie, path):
@@ -29,29 +31,22 @@ class Form(object):
         if code is None:
             code = self.praktijk_code
         code = therapeut_2_praktijk_code(code)
-        for line in lines_from_csv_file(os.path.join(self.path, "gegevens.csv")):
-            splited_line = fix_length(line.split(","))
-
-            if splited_line[5] == code:
-                return {
-                    "naam": splited_line[7],
-                    "email": splited_line[9],
-                    "planned_b_praktijk": splited_line[6],
-                }
-
-        raise FileNotFoundError(code)
+        splited_line = utils.v_find(os.path.join(self.path, "gegevens.csv"), code, 5)
+        return {
+            "naam": splited_line[7],
+            "email": splited_line[9],
+            "planned_b_praktijk": splited_line[6],
+        }
 
     def find_aantal_therapeuten(self, email: str = None):
         if email is None:
             email = self.email
 
-        for line in lines_from_csv_file(
-            os.path.join(self.path, "inschrijven_visitatie_2018.csv")
-        ):
-            if email == str(line.split(",")[1]):
-                return int(line.split(",")[3])
-
-        raise FileNotFoundError(email)
+        return int(
+            utils.v_find(
+                os.path.join(self.path, "inschrijven_visitatie_2018.csv"), email, 1, 3
+            )
+        )
 
     def check_door_de_juist_bezocht(self, praktijk_code=None):
         if praktijk_code is None:
@@ -94,15 +89,6 @@ def therapeut_2_praktijk_code(code):
     return code
 
 
-def lines_from_csv_file(file):
-    with open(file) as f:
-        for line in f:
-            try:
-                yield line.replace("\n", "")
-            except GeneratorExit:
-                pass
-
-
 def fix_length(str_lst: [str]):
     if len(str_lst) != 10:
         str_lst[7] = ",".join(str_lst[7:9])
@@ -112,10 +98,5 @@ def fix_length(str_lst: [str]):
 
 
 def find_plan_b_praktijk(praktijk_code, path):
-    for line in lines_from_csv_file(os.path.join(path, "gegevens.csv")):
-        splited_line = fix_length(line.split(","))
-        if splited_line[6] == str(praktijk_code):
-            return splited_line[5]
-
-    raise FileNotFoundError(praktijk_code)
+    return utils.v_find(os.path.join(path, "gegevens.csv"), str(praktijk_code), 6, 5)
 
