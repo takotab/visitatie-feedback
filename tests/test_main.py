@@ -45,5 +45,5 @@ toets_params = [
 
 @pytest.mark.parametrize("test_input,expected", toets_params)
 def test_get_colour(test_input, expected):
-    color = visitatie._color(test_input)
-    assert str(color) == expected
+    color = visitatie.calc_color(test_input)
+    assert color["color"] == expected

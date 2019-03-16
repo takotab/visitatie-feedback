@@ -14,10 +14,15 @@ def get_color(form: Form):
     get_data_from_all_patients(form)
     excecute_tasks(
         form,
-        [praktijk_toets, get_dossier_toets, get_meetinstrumenten, get_startback_gpe],
+        [
+            praktijk_toets,
+            get_dossier_toets,
+            get_meetinstrumenten,
+            get_startback_gpe,
+            calc_color,
+        ],
     )
-    print(form.toetsen)
-    return "green"
+    return form.toetsen["color"]
 
 
 def excecute_tasks(form: Form, tasks: list):
@@ -45,7 +50,7 @@ toets_norms = {
 }
 
 
-def _color(toetsen: dict):
+def calc_color(toetsen: dict):
     score = 2
     for key, toets_norm in toets_norms.items():
         if toetsen[key] < toets_norm:
@@ -53,5 +58,5 @@ def _color(toetsen: dict):
 
     if toetsen["dossier_per_therapeut"] < 1:
         score -= 1
-
-    return Color(score)
+    c = Color(score)
+    return {"color": str(c), "_color": c}
