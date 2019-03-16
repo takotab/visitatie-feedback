@@ -16,14 +16,23 @@ def remove_additions(dct: list, i: int) -> dict:
     return result
 
 
-def v_find(path: str, match: str, match_col: int, return_col: int = None):
+def v_find(
+    path: str, match: str, match_col: int, return_col: int = None, _in: bool = False
+):
     for line in lines_from_csv_file(path):
         if match == str(line.split(",")[match_col]):
-            if return_col is None:
-                return line.split(",")
-            return line.split(",")[return_col]
+            return return_v_find(line, return_col)
+        if _in:
+            if match.lower() in str(line.split(",")[match_col]).lower():
+                return return_v_find(line, return_col)
 
     raise FileNotFoundError(match)
+
+
+def return_v_find(line, return_col):
+    if return_col is None:
+        return line.split(",")
+    return line.split(",")[return_col]
 
 
 def lines_from_csv_file(file):

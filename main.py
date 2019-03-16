@@ -19,14 +19,14 @@ def main(dir):
     result = {}
     for i in range(4, 100):
         a_form = visitatie.get_data(i=i, path=dir)
-        if a_form.bezoekende_therapeut_code == 999999901:
-            break
+        if a_form.praktijk_code == 9999999:
+            continue
         c = visitatie.get_color(a_form)
         print(i, c)
         result[a_form.naam] = c
     # TODO Save praktijk_dict as json
     # TODO make pdf rapport
-    print(result)
+    print(len(result), result)
 
 
 if __name__ == "__main__":

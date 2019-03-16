@@ -14,6 +14,8 @@ class Form(object):
 
     def get_basic_info(self):
         self.praktijk_code = self.dct["Praktijkcode van de praktijk die bezocht wordt"]
+        if self.praktijk_code == int(9_999_999):
+            return self
         inschrijving_gegevens = self.find_inschrijving_info_code()
         self.naam = inschrijving_gegevens["naam"]
         self.email = inschrijving_gegevens["email"]
@@ -32,6 +34,7 @@ class Form(object):
             code = self.praktijk_code
         code = therapeut_2_praktijk_code(code)
         splited_line = utils.v_find(os.path.join(self.path, "gegevens.csv"), code, 5)
+        print(splited_line)
         return {
             "naam": splited_line[7],
             "email": splited_line[9],
@@ -42,11 +45,26 @@ class Form(object):
         if email is None:
             email = self.email
 
-        return int(
-            utils.v_find(
-                os.path.join(self.path, "inschrijven_visitatie_2018.csv"), email, 1, 3
+        try:
+            return int(
+                utils.v_find(
+                    os.path.join(self.path, "inschrijven_visitatie_2018.csv"),
+                    email,
+                    1,
+                    3,
+                )
             )
-        )
+        except:
+            print(email)
+            return int(
+                utils.v_find(
+                    os.path.join(self.path, "inschrijven_visitatie_2018.csv"),
+                    email.split("@")[-1].split(".")[0],
+                    1,
+                    3,
+                    _in=True,
+                )
+            )
 
     def check_door_de_juist_bezocht(self, praktijk_code=None):
         if praktijk_code is None:
