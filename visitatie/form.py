@@ -7,6 +7,7 @@ class Form(object):
         self.dct = dict(pd_serie)
         self.door_de_juiste_bezocht = False
         self.patients = {"last_patient": "Unknown"}
+        self.toetsen = {}
         self.get_basic_info()
 
     def get_basic_info(self):
@@ -72,10 +73,13 @@ class Form(object):
         if self.patients["last_patient"] == "Unknown":
             raise NotImplementedError()
 
-        self.dossier_per_therapeut = (
+        self.toetsen["dossier_per_therapeut"] = (
             self.patients["last_patient"] / self.aantal_therapeuten
         )
-        return self.dossier_per_therapeut
+        return self.toetsen["dossier_per_therapeut"]
+
+    def add_toets(self, toets_results):
+        self.toetsen.update(toets_results)
 
 
 def therapeut_2_praktijk_code(code):

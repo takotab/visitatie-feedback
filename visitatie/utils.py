@@ -11,3 +11,4 @@ def remove_additions(dct: list, i: int) -> dict:
     for key, item in dct.items():
         result[key.replace("." + str(i), "")] = item
     return result
+

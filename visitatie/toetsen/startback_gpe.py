@@ -12,10 +12,13 @@ def get_startback_gpe(form: Form):
     for i in range(form.patients["last_patient"]):
         result[i] = _meetinstrumenten(form.patients[i], i, meetinstrumenten_q)
     result = get_patient_stats(result)
-    return result
+    return {"startback_gpe": result}
 
 
-norms = {"num_start_end": 2, "num_meetinstrumenten_used": 2}
+norms = {
+    "num_start_end": 2,
+    # "num_meetinstrumenten_used": 2
+}
 
 
 def get_patient_stats(result: dict):
@@ -26,5 +29,5 @@ def get_patient_stats(result: dict):
             if patient[key] >= norm:
                 norm_met += 1
 
-    result["num_norm_met"] = int(norm_met > 1)
+    result["num_norm_met"] = norm_met
     return result

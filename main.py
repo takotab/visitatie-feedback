@@ -8,7 +8,7 @@ parser = argparse.ArgumentParser(description="Handeling the results of the visit
 
 parser.add_argument(
     "--map",
-    default="data_fake",
+    default="data_real",
     type=str,
     help="Select the map to be used for making the results.",
 )

@@ -22,7 +22,7 @@ def get_meetinstrumenten(form: Form):
     for i in range(form.patients["last_patient"]):
         result[i] = _meetinstrumenten(form.patients[i], i, meetinstrumenten_q)
     result = get_patient_stats(result)
-    return result
+    return {"twee_meetinstrumenten": result}
 
 
 norms = {
