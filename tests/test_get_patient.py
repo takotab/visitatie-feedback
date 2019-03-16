@@ -16,7 +16,8 @@ def test_get_patient():
     ] = 00
     assert visitatie.get_patient_data(a_form, 0) == patient_data
 
-    patient_data = visitatie.get_data_from_all_patients(a_form)
+    visitatie.get_data_from_all_patients(a_form)
+    patient_data = a_form.patients
     assert set(list(patient_data.keys())) == set([0, 1, "last_patient"])
     assert patient_data["last_patient"] == 1
 

@@ -3,10 +3,17 @@ from visitatie.mean import Mean
 
 
 def get_dossier_toets(form: Form):
-    result = {}
+    results = {}
     for i in range(form.patients["last_patient"]):
-        result[i] = _dossier_toets(form.patients[i])
-    return result
+        results[i] = _dossier_toets(form.patients[i])
+    return {"_dossiertoets": results, "Dossiertoets": get_stats(results)}
+
+
+def get_stats(results: dict):
+    mean = Mean()
+    for _, item in results.items():
+        mean.add(item["Dossiertoets"])
+    return mean.mean()
 
 
 dossier_toets_q = [

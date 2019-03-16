@@ -1,4 +1,7 @@
-from visitatie.toetsen.meetinstrumenten_utils import _meetinstrumenten
+from visitatie.toetsen.meetinstrumenten_utils import (
+    _meetinstrumenten,
+    get_patient_stats,
+)
 from visitatie.form import Form
 
 meetinstrumenten_q = {
@@ -17,28 +20,19 @@ meetinstrumenten_q = {
 }
 
 
-def get_meetinstrumenten(form: Form):
-    result = {}
-    for i in range(form.patients["last_patient"]):
-        result[i] = _meetinstrumenten(form.patients[i], i, meetinstrumenten_q)
-    result = get_patient_stats(result)
-    return {"twee_meetinstrumenten": result}
-
-
 norms = {
     "num_start_end": 2,
     #  "num_meetinstrumenten_used": 2,
 }
 
 
-def get_patient_stats(result: dict):
-    norm_met = 0
-    for _, patient in result.items():
-        # meetinstrument_norm_met = 0
-        for key, norm in norms.items():
-            if patient[key] >= norm:
-                norm_met += 1
+def get_meetinstrumenten(form: Form):
+    result = {}
+    for i in range(form.patients["last_patient"]):
+        result[i] = _meetinstrumenten(form.patients[i], i, meetinstrumenten_q)
 
-    result["num_norm_met"] = norm_met
-    return result
+    return {
+        "twee_meetinstrumenten": get_patient_stats(result, norms),
+        "_twee_meetinstrumenten": result,
+    }
 

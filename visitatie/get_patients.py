@@ -7,6 +7,7 @@ from visitatie._patient_question_file import (
 )
 from visitatie.utils import make_addition
 
+
 def get_data_from_all_patients(form: Form):
     last = False
     i = 0
@@ -14,7 +15,7 @@ def get_data_from_all_patients(form: Form):
         last = get_patient_data(form, i, is_last=True)
         i += 1
     form._check_num_patients()
-    return form.patients
+    # return form.patients
 
 
 def get_patient_data(form: Form, i: int = 0, is_last: bool = False):

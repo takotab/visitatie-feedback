@@ -44,3 +44,12 @@ def get_stats(result: dict):
     result["num_start_end"] = num_start_end
     result["used_meet_instrumenten"] = used_meet_instrumenten
     return result
+
+
+def get_patient_stats(result: dict, norms: dict):
+    norm_met = 0
+    for _, patient in result.items():
+        for key, norm in norms.items():
+            if patient[key] >= norm:
+                norm_met += 1
+    return norm_met
