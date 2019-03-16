@@ -19,7 +19,7 @@ def get_color(form: Form):
             get_dossier_toets,
             get_meetinstrumenten,
             get_startback_gpe,
-            calc_color,
+            get_form_color,
         ],
     )
     return form.toetsen["color"]
@@ -48,6 +48,10 @@ toets_norms = {
     "twee_meetinstrumenten": 1,
     "startback_gpe": 1,
 }
+
+
+def get_form_color(form: Form):
+    return calc_color(form.toetsen)
 
 
 def calc_color(toetsen: dict):

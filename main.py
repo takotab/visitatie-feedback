@@ -16,8 +16,9 @@ args = parser.parse_args()
 
 
 def main(map):
-    a_form = visitatie.get_data(i=0)
-    visitatie.get_colour(a_form)
+    for i in range(10):
+        a_form = visitatie.get_data(i=0)
+        print(i, visitatie.get_color(a_form))
 
     # TODO Save praktijk_dict as json
     # TODO make pdf rapport
