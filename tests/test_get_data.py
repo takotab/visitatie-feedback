@@ -55,3 +55,8 @@ def _check_in_file(f: str, should_be_s: [str], should_not_be_s: [str]):
                 assert should_not_be not in line
             return
 
+
+@pytest.mark.raises(exception=FileNotFoundError)
+def test_file_not_found():
+    for i in range(20):
+        visitatie.get_data(i)

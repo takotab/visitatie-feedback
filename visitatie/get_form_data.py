@@ -8,6 +8,8 @@ def get_data(i=0, path="data_fake"):
     f = os.path.join(path, "visitatie_form.csv")
     f = checkfile(f)
     df = pd.read_csv(f)
+    if i == df.shape[0]:
+        raise FileNotFoundError(str(i) + "/" + str(df.shape[0]))
     return Form(df.iloc[i, :], path)
 
 

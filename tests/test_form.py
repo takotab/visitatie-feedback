@@ -67,3 +67,11 @@ def test_empty_keys():
     all_keys = a_form.get_keys()
     assert all_keys == list(a_form.dct.keys())
 
+
+# @pytest.mark.raises(exception=KeyError)
+def test_99999():
+    a_form = visitatie.get_data(i=3)
+
+
+def test_weird_email():
+    a_form = visitatie.get_data(i=4)
