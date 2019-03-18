@@ -43,8 +43,8 @@ class Color(object):
 
 toets_norms = {
     "dossier_per_therapeut": 1,
-    "praktijktoets": 0.92,
-    "Dossiertoets": 0.92,
+    "praktijktoets": 0.88,
+    "Dossiertoets": 0.88,
     "twee_meetinstrumenten": 1,
     "startback_gpe": 1,
 }

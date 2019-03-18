@@ -34,11 +34,12 @@ dossier_toets_q = [
 
 
 def _dossier_toets(
-    antworden: dict, i: int, negatief="niet aanwezig", niet_van_toepassing=True
+    antworden: dict, i: int, negatief="niet aanwezig", niet_van_toepassing=False
 ):
     antworden = remove_additions(antworden, i)
     mean = Mean()
     for item in [antworden[q] for q in dossier_toets_q]:
-        if "niet van toepassing" not in item and niet_van_toepassing:
-            mean(negatief not in item)
+        if "niet van toepassing" in str(item).lower() and niet_van_toepassing:
+            continue
+        mean(negatief not in item)
     return {"Dossiertoets": mean.mean()}

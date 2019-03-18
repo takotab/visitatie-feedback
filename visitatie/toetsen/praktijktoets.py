@@ -18,11 +18,12 @@ def praktijk_toets(form: Form, niet_van_toepassing=True, **kwargs):
 
 
 def _praktijk_toets(
-    antworden: dict, negatief="niet aanwezig", niet_van_toepassing=True
+    antworden: dict, negatief="niet aanwezig", niet_van_toepassing=False
 ):
     mean = Mean()
     for _, item in antworden.items():
-        if "niet van toepassing" not in item and niet_van_toepassing:
-            mean(negatief not in item)
+        if "niet van toepassing" in str(item).lower() and niet_van_toepassing:
+            continue
+        mean(negatief not in item)
 
     return {"praktijktoets": mean.mean()}
