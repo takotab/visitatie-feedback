@@ -39,19 +39,7 @@ def make_htmlfile(form_dct: dict, save=True):
         "Gebruik GPE ",
     ]
     pd.set_option("display.max_colwidth", -1)
-    doc = (
-        doc[0]
-        + pd.DataFrame()
-        .from_dict(
-            {
-                "Item": [str(i) for i in range(1, len(stoplicht) + 1)],
-                "Beschrijving (per dossier)": stoplicht,
-            }
-        )
-        .to_html(index=False)
-        + "</div>\n    </div>"
-        + doc[1]
-    )
+    doc = doc[0] + make_bescrhijving_table(stoplicht) + "</div>\n    </div>" + doc[1]
     # doc = align_td(doc)
     print(doc)
     if save:
@@ -59,6 +47,19 @@ def make_htmlfile(form_dct: dict, save=True):
             f.write(str(doc))
         return doc, filename + ".html"
     return str(doc)
+
+
+def make_bescrhijving_table(stoplicht: list):
+    return (
+        pd.DataFrame()
+        .from_dict(
+            {
+                "Item": [str(i) for i in range(1, len(stoplicht) + 1)],
+                "Beschrijving (per dossier)": stoplicht,
+            }
+        )
+        .to_html(index=False)
+    )
 
 
 # def align_td(doc: str):
