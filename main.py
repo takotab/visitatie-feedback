@@ -16,6 +16,7 @@ args = parser.parse_args()
 
 
 def main(dir):
+    result_froms = {}
     result = {}
     for i in range(4, 66):
         a_form = visitatie.get_data(i=i, path=dir)
@@ -24,6 +25,7 @@ def main(dir):
         c = visitatie.get_color(a_form)
         print(i, c)
         result[a_form.naam] = c
+        result_froms[a_form.praktijk_code] = a_form
     # TODO Save praktijk_dict as json
     # TODO make pdf rapport
     print(len(result), result)
@@ -37,6 +39,7 @@ def main(dir):
         print(f"\n---{key}---\n")
         print("num of praktijken:", len(result_r[key]))
         print(result_r[key])
+    print([(len(result_r[key]), key) for key in result_r])
 
 
 if __name__ == "__main__":

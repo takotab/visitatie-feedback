@@ -22,7 +22,7 @@ def get_color(form: Form):
             get_form_color,
         ],
     )
-    return form.toetsen["color"]
+    return form.toetsen["Catagorie"]
 
 
 def excecute_tasks(form: Form, tasks: list):
@@ -31,22 +31,24 @@ def excecute_tasks(form: Form, tasks: list):
 
 
 class Color(object):
-    def __init__(self, score):
-        color = {0: "Rood", 1: "Oranje", 2: "Groen"}
+    def __init__(self, score, fout: list):
+        color = {0: "Rood", 1: "Oranje", 2: "Groen", 3: "Groen"}
         self.score = score
         self.i = max([0, score])
         self.color = color[self.i]
+        self.fout = fout
 
     def __str__(self):
         return self.color
 
 
 toets_norms = {
-    "dossier_per_therapeut": 1,
-    "praktijktoets": 0.88,
-    "Dossiertoets": 0.88,
-    "twee_meetinstrumenten": 1,
-    "startback_gpe": 1,
+    "dossier_per_therapeut": 2,  # TODO check
+    "Praktijktoets": 0.88,
+    "Dossiertoets": 0.87,
+    "twee_meetinstrumenten": 2,
+    "STarTBack": 1,
+    "GPE": 1,
 }
 
 
@@ -55,12 +57,14 @@ def get_form_color(form: Form):
 
 
 def calc_color(toetsen: dict):
-    score = 2
+    score = 3
+    fout = []
     for key, toets_norm in toets_norms.items():
         if toetsen[key] < toets_norm:
             score -= 1
+            fout.append(key)
 
-    if toetsen["dossier_per_therapeut"] < 1:
-        score -= 1
-    c = Color(score)
-    return {"color": str(c), "_color": c}
+    if toetsen["dossier_per_therapeut"] < toets_norms["dossier_per_therapeut"]:
+        score -= 2
+    c = Color(score, fout)
+    return {"Catagorie": str(c), "_color": c, "Score": score}

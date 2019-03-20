@@ -26,4 +26,4 @@ def _praktijk_toets(
             continue
         mean(negatief not in item)
 
-    return {"praktijktoets": mean.mean()}
+    return {"Praktijktoets": mean.mean()}

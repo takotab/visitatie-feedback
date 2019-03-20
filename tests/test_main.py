@@ -12,31 +12,45 @@ def test_main():
 toets_params = [
     (
         {
-            "dossier_per_therapeut": 0.5,
-            "praktijktoets": 0.8571428571428571,
+            "dossier_per_therapeut": 2,
+            "Praktijktoets": 0.9,
             "Dossiertoets": 0.25,
             "twee_meetinstrumenten": 1,
-            "startback_gpe": 0,
+            "STarTBack": 0,
+            "GPE": 0.8,
         },
         "Rood",
     ),
     (
         {
-            "dossier_per_therapeut": 1,
-            "praktijktoets": 0.9928571428571,
-            "Dossiertoets": 0.25,
-            "twee_meetinstrumenten": 1,
-            "startback_gpe": 1,
+            "dossier_per_therapeut": 2,
+            "Praktijktoets": 0.9,
+            "Dossiertoets": 0.9,
+            "twee_meetinstrumenten": 2,
+            "STarTBack": 0,
+            "GPE": 0.8,
         },
         "Oranje",
     ),
     (
         {
             "dossier_per_therapeut": 1,
-            "praktijktoets": 0.9928571428571,
-            "Dossiertoets": 1,
+            "Praktijktoets": 0.9928571428571,
+            "Dossiertoets": 0.25,
             "twee_meetinstrumenten": 1,
-            "startback_gpe": 1,
+            "STarTBack": 1,
+            "GPE": 1,
+        },
+        "Rood",
+    ),
+    (
+        {
+            "dossier_per_therapeut": 2,
+            "Praktijktoets": 0.9928571428571,
+            "Dossiertoets": 1,
+            "twee_meetinstrumenten": 2,
+            "STarTBack": 1,
+            "GPE": 1,
         },
         "Groen",
     ),
@@ -46,4 +60,4 @@ toets_params = [
 @pytest.mark.parametrize("test_input,expected", toets_params)
 def test_get_colour(test_input, expected):
     color = visitatie.calc_color(test_input)
-    assert color["color"] == expected
+    assert color["Catagorie"] == expected

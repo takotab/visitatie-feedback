@@ -5,7 +5,7 @@ from visitatie.utils import remove_additions
 
 def get_dossier_toets(form: Form):
     results = {}
-    for i in range(form.patients["last_patient"] + 1):
+    for i in range(form.patients["last_patient"]):
         results[i] = _dossier_toets(form.patients[i], i)
     return {"_dossiertoets": results, "Dossiertoets": get_stats(results)}
 

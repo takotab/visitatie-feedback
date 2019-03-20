@@ -46,7 +46,7 @@ def check_is_last(form: Form, i: int):
 
 def check_this_is_last(form: Form, i: int):
     if form.patients[i]["Wilt u nog een patiënt invoeren?" + make_addition(i)] == "Nee":
-        form.patients["last_patient"] = i
+        form.patients["last_patient"] = i + 1
         return True
     return False
 

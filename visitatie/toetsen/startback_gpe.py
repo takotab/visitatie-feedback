@@ -5,7 +5,7 @@ from visitatie.toetsen.meetinstrumenten_utils import (
 from visitatie.form import Form
 
 meetinstrumenten_q = {
-    "STarT Back": ["STarT Back Screening Tool", "STarT Back Screening Tool_end"],
+    "STarTBack": ["STarT Back Screening Tool", "STarT Back Screening Tool_end"],
     "GPE": ["GPE1", "GPE2"],
 }
 
@@ -18,7 +18,18 @@ norms = {
 
 def get_startback_gpe(form: Form):
     result = {}
+    keys = ["STarTBack", "GPE"]
+    for key in keys:
+        result.update(_start_gpe(form, key))
+    return result
+
+
+def _start_gpe(form: Form, key: str):
+
+    result = {}
     for i in range(form.patients["last_patient"]):
-        result[i] = _meetinstrumenten(form.patients[i], i, meetinstrumenten_q)
-    return {"_startback_gpe": result, "startback_gpe": get_patient_stats(result, norms)}
+        result[i] = _meetinstrumenten(
+            form.patients[i], i, {key: meetinstrumenten_q[key]}
+        )
+    return {"_" + key: result, key: get_patient_stats(result, norms)}
 

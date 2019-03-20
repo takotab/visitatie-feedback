@@ -94,6 +94,10 @@ class Form(object):
         self.toetsen["dossier_per_therapeut"] = (
             self.patients["last_patient"] / self.aantal_therapeuten
         )
+        self.toetsen["_dossier_per_therapeut"] = {
+            "aantal_theraputen": self.aantal_therapeuten,
+            "Aantal dossiers": self.patients["last_patient"],
+        }
         return self.toetsen["dossier_per_therapeut"]
 
     def add_toets(self, toets_results):
