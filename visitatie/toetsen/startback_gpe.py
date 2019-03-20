@@ -11,7 +11,7 @@ meetinstrumenten_q = {
 
 
 norms = {
-    "num_start_end": 2,
+    "num_start_end": 1,
     # "num_meetinstrumenten_used": 2
 }
 

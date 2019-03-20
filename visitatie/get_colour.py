@@ -46,7 +46,7 @@ toets_norms = {
     "dossier_per_therapeut": 2,  # TODO check
     "Praktijktoets": 0.88,
     "Dossiertoets": 0.87,
-    "twee_meetinstrumenten": 2,
+    "twee_meetinstrumenten": 1,
     "STarTBack": 1,
     "GPE": 1,
 }
