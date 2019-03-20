@@ -108,3 +108,4 @@ data_real/*
 *_adjusted.csv
 results.csv
 results.json
+deploy_hints.txt
