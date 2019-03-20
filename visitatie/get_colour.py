@@ -43,7 +43,7 @@ class Color(object):
 
 
 toets_norms = {
-    "dossier_per_therapeut": 2,  # TODO check
+    "dossier_per_therapeut": 2,
     "Praktijktoets": 0.7,
     "Dossiertoets": 0.7,
     "twee_meetinstrumenten": 1,
