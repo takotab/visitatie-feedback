@@ -17,6 +17,8 @@ class Form(object):
         if self.praktijk_code == int(9_999_999):
             return self
         inschrijving_gegevens = self.find_inschrijving_info_code()
+        for key, item in inschrijving_gegevens.items():
+            setattr(self, key, item)
         self.naam = inschrijving_gegevens["naam"]
         self.email = inschrijving_gegevens["email"]
         self.aantal_therapeuten = self.find_aantal_therapeuten()
@@ -35,10 +37,12 @@ class Form(object):
         code = therapeut_2_praktijk_code(code)
         splited_line = utils.v_find(os.path.join(self.path, "gegevens.csv"), code, 5)
         print(splited_line)
+        assert "@" in splited_line[9]
         return {
             "naam": splited_line[7],
             "email": splited_line[9],
             "planned_b_praktijk": splited_line[6],
+            "regio": splited_line[8],
         }
 
     def find_aantal_therapeuten(self, email: str = None):

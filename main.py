@@ -1,7 +1,8 @@
 import argparse
 import os
 import logging
-
+import json
+import pandas as pd
 import visitatie
 
 parser = argparse.ArgumentParser(description="Handeling the results of the visitatie.")
@@ -25,7 +26,7 @@ def main(dir):
         c = visitatie.get_color(a_form)
         print(i, c)
         result[a_form.naam] = c
-        result_froms[a_form.praktijk_code] = a_form
+        result_froms[a_form.naam] = visitatie.get_json_dct(a_form)
     # TODO Save praktijk_dict as json
     # TODO make pdf rapport
     print(len(result), result)
@@ -40,6 +41,9 @@ def main(dir):
         print("num of praktijken:", len(result_r[key]))
         print(result_r[key])
     print([(len(result_r[key]), key) for key in result_r])
+    json.dump(result_froms, open("results.json", "w"))
+    df = pd.read_json("results.json").T
+    df.to_csv("results.csv")
 
 
 if __name__ == "__main__":

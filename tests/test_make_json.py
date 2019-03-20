@@ -1,3 +1,6 @@
+import os
+import json
+
 import visitatie
 
 example_keys = [
@@ -28,3 +31,12 @@ def test_make_json_dct():
 
     for key in example_keys:
         assert key in json_dct
+
+
+def test_make_actual_json():
+    a_form = visitatie.get_data(0)
+    _ = visitatie.get_color(a_form)
+    json_dct = visitatie.get_json_dct(a_form)
+    json.dump(json_dct, open("test_results.json", "w"))
+    assert os.path.isfile("test_results.json")
+    os.remove("test_results.json")

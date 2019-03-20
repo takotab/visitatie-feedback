@@ -47,10 +47,10 @@ def checkfile(f_path: str, debug=False):
                 if not adjusted:
                     return f_path
                 assert len(new_line.split(",")) == len(line.split(","))
-                new_file += new_line + os.linesep
+                new_file += new_line
                 first_line = False
             else:
-                new_file += line + os.linesep
+                new_file += line  # + os.linesep
 
     with open(new_file_name(f_path), "w") as f_new:
         f_new.write(new_file)
