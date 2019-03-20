@@ -17,11 +17,11 @@ def get_json_dct(form: Form):
         if key[0] != "_":
             result[key.replace("_", " ")] = item
 
-    return make_all_str(result)
+    return make_all_str(result, remove_quotes)
 
 
 def remove_quotes(*args):
-    return [arg.replace('"', "") for arg in args]
+    return [str(arg).replace('"', "") for arg in args]
 
 
 def make_all_str(dct: dict, fn: callable = None):

@@ -37,8 +37,7 @@ class Form(object):
         code = therapeut_2_praktijk_code(code)
         splited_line = utils.v_find(os.path.join(self.path, "gegevens.csv"), code, 5)
         print(splited_line)
-        if "@" not in str(splited_line[9]):
-            print(splited_line[9])
+
         assert "@" in str(splited_line[9]), str(splited_line[9])
         return {
             "naam": splited_line[7],
