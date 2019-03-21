@@ -44,8 +44,8 @@ def main(dir):
     json.dump(result_froms, open("data_real/results_.json", "w"))
     df = pd.read_json("data_real/results_.json").T
     df.to_csv("results.csv")
-    visitatie.all_results()
-    
+    visitatie.all_results(result_froms)
+
 
 if __name__ == "__main__":
     main(args.dir)
