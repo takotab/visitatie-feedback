@@ -24,12 +24,26 @@ def make_htmlfile(form_dct: dict, save=True):
             dt.br()
             dt.div(
                 "In de onderstaande gegevens is te zien waar uw praktijkcode staat ten opzichten van het gemiddelde.Er staat tevens waar wij als netwerk naar toe willen: de norm (Groen).Dit is verwerkt in een stoplichtmodel."
-                + "Er zijn drie categorieen: Groen, Oranje en Rood.Voor de normering wordt gebruik gemaakt van de 6 items weergeven in de onderstaande tabel."
             )
             dt.br()
-            dt.div()
-    doc = str(doc).split("</div>\n    </div>")
-    assert len(doc) == 2
+            dt.div(
+                "Er zijn drie categorieen: Groen, Oranje en Rood.Voor de normering wordt gebruik gemaakt van de 6 items weergeven in de onderstaande tabel."
+            )
+            dt.br()
+            dt.div("beschrijvings_table")
+            dt.br()
+            dt.div(
+                "In de onderstaande tabel zijn de voorwaarde voor de categorieen te vinden. Om een categorie te behalen moet beide aan voorwaarde worden voldaan."
+            )
+            dt.div("norm_table")
+            dt.br()
+            dt.div("Uw catagorie is: " + form_dct["Catagorie"])
+            if form_dct["Catagorie"] == "Rood":
+                dt.div( 
+                    "Wij verwachten binnen 2 weken een reactie. Er kunnen verschillende reden zijn waarom dit zo is. Wij zijn hier erg benieuwd naar."
+                )
+            dt.h2("Resultaten")
+            
     stoplicht = [
         "2 Dossiers per Therapeut = 100%",
         "Praktijktoets",
@@ -39,8 +53,8 @@ def make_htmlfile(form_dct: dict, save=True):
         "Gebruik GPE ",
     ]
     pd.set_option("display.max_colwidth", -1)
-    doc = doc[0] + make_bescrhijving_table(stoplicht) + "</div>\n    </div>" + doc[1]
-    # doc = align_td(doc)
+    doc = make_bescrhijving_table(str(doc), stoplicht, "<div>beschrijvings_table</div>")
+
     print(doc)
     if save:
         with open(filename + ".html", "w") as f:
@@ -49,8 +63,12 @@ def make_htmlfile(form_dct: dict, save=True):
     return str(doc)
 
 
-def make_bescrhijving_table(stoplicht: list):
-    return (
+def replace_keyword(doc: str, keyword: str, item: str):
+    return doc.replace(keyword, item)
+
+
+def make_bescrhijving_table(doc: str, stoplicht: list, keyword: str):
+    table = (
         pd.DataFrame()
         .from_dict(
             {
@@ -60,6 +78,7 @@ def make_bescrhijving_table(stoplicht: list):
         )
         .to_html(index=False)
     )
+    return replace_keyword(doc, keyword, table)
 
 
 # def align_td(doc: str):
