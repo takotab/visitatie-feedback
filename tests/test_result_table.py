@@ -58,5 +58,5 @@ def test_result_table():
     assert result_dct["Regio Champions League"]["GPE"] == 0.5
     assert result_dct["Regio Champions League"]["Dossier per Therapeut"] == 1.5
 
-    os.remove("data_fake/result_mean_Champions League.json")
-    os.remove("data_fake/result_mean_All.json")
+    os.remove("data_fake/results_mean_Champions League.json")
+    os.remove("data_fake/results_mean_All.json")
