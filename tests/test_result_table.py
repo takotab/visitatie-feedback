@@ -60,3 +60,9 @@ def test_result_table():
 
     os.remove("data_fake/results_mean_Champions League.json")
     os.remove("data_fake/results_mean_All.json")
+
+
+def test_make_result_figure():
+    praktijk = "Real Madrid"
+    f = visitatie.make_result_figure(praktijk, RESULT_DICT, unit_test=True)
+    assert os.path.isfile(f)

@@ -4,6 +4,8 @@ import pandas as pd
 import dominate
 from dominate import tags as dt
 
+from .result_figure import make_result_figure
+
 
 def make_htmlfile(praktijk: str, visitatie_uitslag: dict = None, unit_test=False):
     filename = "Feedback visitatie " + praktijk + " 2018"
@@ -35,7 +37,7 @@ def make_htmlfile(praktijk: str, visitatie_uitslag: dict = None, unit_test=False
             dt.div(
                 "In de onderstaande tabel zijn de voorwaarde voor de categorieen te vinden. Om een categorie te behalen moet beide aan voorwaarde worden voldaan."
             )
-            dt.div("norm_table")
+            dt.div("norm_table")  # TODO
             dt.br()
             dt.div("Uw catagorie is: " + visitatie_uitslag[praktijk]["Catagorie"])
             if visitatie_uitslag[praktijk]["Catagorie"] == "Rood":
@@ -43,10 +45,9 @@ def make_htmlfile(praktijk: str, visitatie_uitslag: dict = None, unit_test=False
                     "Wij verwachten binnen 2 weken een reactie. Er kunnen verschillende reden zijn waarom dit zo is. Wij zijn hier erg benieuwd naar."
                 )
             dt.h2("Resultaten")
-            dt.img(
-                src=visitatie.make_result_figure(praktijk, visitatie_uitslag, unit_test)
-            )
-            dt.dive("result_table")
+            dt.img(src=make_result_figure(praktijk, visitatie_uitslag, unit_test))
+            dt.div("result_table")  # TODO
+
     stoplicht = [
         "2 Dossiers per Therapeut = 100%",
         "Praktijktoets",

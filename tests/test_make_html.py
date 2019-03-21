@@ -1,31 +1,12 @@
 import os
 import pdfkit
 import visitatie
-
-example_keys = [
-    "naam",
-    "email",
-    "Praktijkcode",
-    "Aantal Dossiers",
-    "Aantal Therapeuten",
-    "Bezoekende Praktijkcode",
-    "Door de juiste bezocht",
-    "Dossier per Therapeut",
-    "door de juiste bezocht",
-    "dossier per therapeut",
-    "Praktijktoets",
-    "Dossiertoets",
-    "twee meetinstrumenten",
-    "STarTBack",
-    "GPE",
-    "Catagorie",
-    "Score",
-]
+from tests.test_result_table import RESULT_DICT
 
 
 def test_make_html():
     filename = "test_pdf.pdf"
-    doc, html_f = visitatie.make_htmlfile({"naam": "Tako"})
+    doc, html_f = visitatie.make_htmlfile("Tako", RESULT_DICT, unit_test=True)
     assert type(str(doc)) == str
     assert os.path.isfile(html_f)
     os.remove(filename)

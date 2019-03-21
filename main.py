@@ -41,10 +41,11 @@ def main(dir):
         print("num of praktijken:", len(result_r[key]))
         print(result_r[key])
     print([(len(result_r[key]), key) for key in result_r])
-    json.dump(result_froms, open("results.json", "w"))
-    df = pd.read_json("results.json").T
+    json.dump(result_froms, open("data_real/results_.json", "w"))
+    df = pd.read_json("data_real/results_.json").T
     df.to_csv("results.csv")
-
+    visitatie.all_results()
+    
 
 if __name__ == "__main__":
     main(args.dir)
