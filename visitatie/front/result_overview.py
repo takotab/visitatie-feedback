@@ -3,6 +3,8 @@ import json
 
 import pandas as pd
 
+from .utils import visitatie_uitslag_filename, regio_filename
+
 cols = [
     "Aantal Therapeuten",
     "Dossier per Therapeut",
@@ -14,7 +16,6 @@ cols = [
     "Catagorie",
     "Regio",
 ]
-
 
 def make_result(praktijk: str, visitatie_uitslag: dict = None, unit_test=False):
     if visitatie_uitslag is None:
@@ -31,16 +32,6 @@ def make_result(praktijk: str, visitatie_uitslag: dict = None, unit_test=False):
     for c in cols[:-2]:
         result[praktijk][c] = float(visitatie_uitslag[praktijk][c])
     return result
-
-
-def visitatie_uitslag_filename(unit_test: bool):
-    folder = {0: "data_real", 1: "data_fake"}
-    return folder[int(unit_test)] + "/results.json"
-
-
-def regio_filename(regio: str, unit_test: bool):
-    folder = {0: "data_real", 1: "data_fake"}
-    return folder[int(unit_test)] + "/result_mean_" + regio + ".json"
 
 
 def find_mean_regio(regio: str, visitatie_uitslag: dict, unit_test=False):
