@@ -19,7 +19,7 @@ def all_results(visitatie_uitslag: dict = None, unit_test=False):
 
     df = pd.DataFrame().from_dict(overiew_dct).T
     df_ = df.loc[:, cols]
-    df_.loc["Norm", cols] = [2, 0.7, 1, 0.7, 1, 2, 1]
+    df_.loc["Norm", cols] = [2, 0.7, 1, 0.7, 1, 1]
     df_ = df_ / df_.loc["Norm", :] * 100
 
     plt_df(df_, filename=f)

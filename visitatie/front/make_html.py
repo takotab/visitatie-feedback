@@ -5,17 +5,25 @@ import dominate
 from dominate import tags as dt
 
 from .result_figure import make_result_figure
+from .utils import make_filename
 
 
 def make_htmlfile(praktijk: str, visitatie_uitslag: dict = None, unit_test=False):
-    filename = "Feedback visitatie " + praktijk + " 2018"
+
+    filename = make_filename(
+        "Feedback visitatie " + praktijk + " 2018",
+        folder="result_pdfs",
+        unit_test=unit_test,
+        file_type=".html",
+    )
     doc = dominate.document(title=filename)
+    logo = "data_real/result_pdfs/Logo-rug-netwerk_v2.jpg"
+    assert os.path.isfile(logo)
     with doc:
         with dt.div(style="width:800px; margin:0 auto;"):
-            assert os.path.isfile("Logo-rug-netwerk_v2.jpg")
             dt.h1("Feedback Visitatie 2018 - " + praktijk, align="center")
             dt.h4("25 Maart 2019", align="center")
-            dt.img(width=600, src="Logo-rug-netwerk_v2.jpg", id="header")
+            dt.img(width=600, src=strip_sep(logo), id="header")
             dt.br()
             dt.br()
             dt.div("Beste Rug-netwerker,")
@@ -67,7 +75,7 @@ def make_htmlfile(praktijk: str, visitatie_uitslag: dict = None, unit_test=False
             dt.br()
             dt.h2("Resultaten")
             f, df = make_result_figure(praktijk, visitatie_uitslag, unit_test)
-            dt.img(src=f)
+            dt.img(src=strip_sep(f))
             dt.div("result_table")
 
     stoplicht = [
@@ -82,9 +90,9 @@ def make_htmlfile(praktijk: str, visitatie_uitslag: dict = None, unit_test=False
     doc = make_bescrhijving_table(str(doc), stoplicht, "<div>beschrijvings_table</div>")
     doc = make_norm_table(str(doc))
     doc = make_result_table(doc, df)
-    with open(filename + ".html", "w") as f:
+    with open(filename, "w") as f:
         f.write(str(doc))
-    return doc, filename + ".html"
+    return doc, filename
 
 
 def replace_keyword(doc: str, keyword: str, item: str):
@@ -92,10 +100,14 @@ def replace_keyword(doc: str, keyword: str, item: str):
 
 
 def _format(x):
-    if x == 1:
-        return "1"
+    if float(int(x)) == float(x):
+        return str(int(x))
     else:
         return "{:.2f}".format(x)
+
+
+def strip_sep(f: str):
+    return f.split(os.sep)[-1]
 
 
 def make_norm_table(doc):

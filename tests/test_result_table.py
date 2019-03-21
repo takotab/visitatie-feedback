@@ -24,5 +24,5 @@ def test_result_table():
 
 def test_make_result_figure():
     praktijk = "Real Madrid"
-    f = visitatie.make_result_figure(praktijk, RESULT_DICT, unit_test=True)
+    f, df = visitatie.make_result_figure(praktijk, RESULT_DICT, unit_test=True)
     assert os.path.isfile(f)

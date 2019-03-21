@@ -2,7 +2,10 @@ import argparse
 import os
 import logging
 import json
+
 import pandas as pd
+import pdfkit
+
 import visitatie
 
 parser = argparse.ArgumentParser(description="Handeling the results of the visitatie.")
@@ -27,11 +30,12 @@ def main(dir):
         print(i, c)
         result[a_form.naam] = c
         result_froms[a_form.naam] = visitatie.get_json_dct(a_form)
-    # TODO Save praktijk_dict as json
-    # TODO make pdf rapport
     print(len(result), result)
     result_r = {}
     for key, item in result.items():
+        _, html_f = visitatie.make_htmlfile(key, result_froms)
+        pdfkit.from_file(html_f, html_f.replace(".html", ".pdf"))
+        print("made file", key)
         if item in result_r:
             result_r[item].append(key)
         else:
