@@ -5,13 +5,13 @@ import dominate
 from dominate import tags as dt
 
 
-def make_htmlfile(form_dct: dict, save=True):
-    filename = "Feedback visitatie " + form_dct["naam"] + " 2018"
+def make_htmlfile(praktijk: str, visitatie_uitslag: dict = None, unit_test=False):
+    filename = "Feedback visitatie " + praktijk + " 2018"
     doc = dominate.document(title=filename)
     with doc:
         with dt.div(style="width:800px; margin:0 auto;"):
             assert os.path.isfile("Logo-rug-netwerk_v2.jpg")
-            dt.h1("Feedback Visitatie 2018 - " + form_dct["naam"], align="center")
+            dt.h1("Feedback Visitatie 2018 - " + praktijk, align="center")
             dt.h4("25 Maart 2019", align="center")
             dt.img(width=600, src="Logo-rug-netwerk_v2.jpg", id="header")
             dt.br()
@@ -37,13 +37,16 @@ def make_htmlfile(form_dct: dict, save=True):
             )
             dt.div("norm_table")
             dt.br()
-            dt.div("Uw catagorie is: " + form_dct["Catagorie"])
-            if form_dct["Catagorie"] == "Rood":
-                dt.div( 
+            dt.div("Uw catagorie is: " + visitatie_uitslag[praktijk]["Catagorie"])
+            if visitatie_uitslag[praktijk]["Catagorie"] == "Rood":
+                dt.div(
                     "Wij verwachten binnen 2 weken een reactie. Er kunnen verschillende reden zijn waarom dit zo is. Wij zijn hier erg benieuwd naar."
                 )
             dt.h2("Resultaten")
-            
+            dt.img(
+                src=visitatie.make_result_figure(praktijk, visitatie_uitslag, unit_test)
+            )
+            dt.dive("result_table")
     stoplicht = [
         "2 Dossiers per Therapeut = 100%",
         "Praktijktoets",
@@ -55,12 +58,9 @@ def make_htmlfile(form_dct: dict, save=True):
     pd.set_option("display.max_colwidth", -1)
     doc = make_bescrhijving_table(str(doc), stoplicht, "<div>beschrijvings_table</div>")
 
-    print(doc)
-    if save:
-        with open(filename + ".html", "w") as f:
-            f.write(str(doc))
-        return doc, filename + ".html"
-    return str(doc)
+    with open(filename + ".html", "w") as f:
+        f.write(str(doc))
+    return doc, filename + ".html"
 
 
 def replace_keyword(doc: str, keyword: str, item: str):

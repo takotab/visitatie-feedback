@@ -1,0 +1,55 @@
+---
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+`r table$e..mail.organisatie[ipraktijk]`
+
+![](Logorugnetwerk.jpg)
+
+Beste Rug-netwerk therapeut,
+
+
+Met trots nodigen we u uit voor een nieuwe visitatie ronde. In deze brief vindt u belangrijke informatie voor de visitatie, waaronder praktijkcode en links voor de visitatie. U ziet tevens bij welke praktijk u op bezoek mag gaan om te visiteren. Vanzelfsprekend ontvangt u de bezoekende therapeut netjes en respectvol. Plan de visitatie zo spoedig mogelijk, in ieder geval binnen 2 maanden, voor 1 augustus.
+
+
+Belangrijk: de link naar het visitatie formulier mag u maar ** 1 keer** gebruiken! Zorg er dus voor dat er genoeg tijd is om het in één keer af te ronden. Als gevisiteerde praktijk is het ook van belang dat de nodige dossiers aanwezig zijn zodat de visitatie vlot kan verlopen. Voor iedere Rug-netwerktherapeut dienen er 2 dossiers aanwezig zijn.
+Om goed voorbereidt te zijn kan het handig zijn om een instructie video te bekijken: http/www. youtp.com 
+
+Ook is het mogelijk om een proefaccount aan te vragen om zo een eigen proef dossier in te voeren. U kunt dan ook een analyse krijgen. Stuur dan voor 15 juni een mail naar visitatie@rug-netwerk.nl voor proefaccount.
+
+Bewaar deze codes goed. 
+
+Eigen Praktijkcode: `r table$praktijknr[ipraktijk]`
+
+De therapeut codes:
+```{r therapeutcode, echo=FALSE } 
+
+knitr::kable((namesoftherapueten)) 
+
+```
+
+De link voor het visitatieformulier: https://goo.gl/Ba25uR
+
+U krijgt bericht van de therapeut die bij u op bezoek komt. Uzelf bent ingedeeld bij onderstaande praktijk. Neem voor de visitatie zelf contact op met deze praktijk om zo spoedig mogelijk een bezoek te kunnen plannen. 
+
+Bij onderstaande praktijk gaat u op bezoek voor de visitatie:
+```{r tebezoekpraktijkev, echo=FALSE } 
+
+knitr::kable(t(tebezoekpraktijk)) 
+
+```
+
+
+
+Indien u nog vragen heeft, kunt u contact opnemen met Divera Twisk via
+
+visitatie@rug-netwerk.nl
+
+
+Veel succes,
+
+De Commissie Visitatie
