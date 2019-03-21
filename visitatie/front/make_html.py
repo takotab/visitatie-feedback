@@ -37,16 +37,38 @@ def make_htmlfile(praktijk: str, visitatie_uitslag: dict = None, unit_test=False
             dt.div(
                 "In de onderstaande tabel zijn de voorwaarde voor de categorieen te vinden. Om een categorie te behalen moet beide aan voorwaarde worden voldaan."
             )
-            dt.div("norm_table")  # TODO
+            dt.div("norm_table")
             dt.br()
             dt.div("Uw catagorie is: " + visitatie_uitslag[praktijk]["Catagorie"])
             if visitatie_uitslag[praktijk]["Catagorie"] == "Rood":
                 dt.div(
                     "Wij verwachten binnen 2 weken een reactie. Er kunnen verschillende reden zijn waarom dit zo is. Wij zijn hier erg benieuwd naar."
                 )
+            else:
+                dt.br()
+                dt.br()
+
+            dt.br()
+            dt.br()
+            dt.br()
+            dt.br()
+            dt.br()
+            dt.br()
+            dt.br()
+            dt.br()
+            dt.br()
+            dt.br()
+            dt.br()
+            dt.br()
+            dt.br()
+            dt.br()
+            dt.br()
+            dt.br()
+            dt.br()
             dt.h2("Resultaten")
-            dt.img(src=make_result_figure(praktijk, visitatie_uitslag, unit_test))
-            dt.div("result_table")  # TODO
+            f, df = make_result_figure(praktijk, visitatie_uitslag, unit_test)
+            dt.img(src=f)
+            dt.div("result_table")
 
     stoplicht = [
         "2 Dossiers per Therapeut = 100%",
@@ -58,7 +80,8 @@ def make_htmlfile(praktijk: str, visitatie_uitslag: dict = None, unit_test=False
     ]
     pd.set_option("display.max_colwidth", -1)
     doc = make_bescrhijving_table(str(doc), stoplicht, "<div>beschrijvings_table</div>")
-
+    doc = make_norm_table(str(doc))
+    doc = make_result_table(doc, df)
     with open(filename + ".html", "w") as f:
         f.write(str(doc))
     return doc, filename + ".html"
@@ -66,6 +89,39 @@ def make_htmlfile(praktijk: str, visitatie_uitslag: dict = None, unit_test=False
 
 def replace_keyword(doc: str, keyword: str, item: str):
     return doc.replace(keyword, item)
+
+
+def _format(x):
+    if x == 1:
+        return "1"
+    else:
+        return "{:.2f}".format(x)
+
+
+def make_norm_table(doc):
+    return replace_keyword(
+        doc,
+        "<div>norm_table</div>",
+        pd.DataFrame()
+        .from_dict(
+            {
+                "Catagorie": ["Groen", "Oranje", "Rood"],
+                "Item 1": ["100%", "100%", "<100%"],
+                "Item 2 t/m 6": [
+                    "0 of 1 onder de norm",
+                    "2 onder de norm",
+                    "3 of meer onder de norm",
+                ],
+            }
+        )
+        .to_html(float_format=_format),
+    )
+
+
+def make_result_table(doc: str, df: pd.DataFrame):
+    return replace_keyword(
+        doc, "<div>result_table</div>", df.T.to_html(float_format=_format)
+    )
 
 
 def make_bescrhijving_table(doc: str, stoplicht: list, keyword: str):

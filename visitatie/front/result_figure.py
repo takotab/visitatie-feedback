@@ -23,4 +23,4 @@ def make_result_figure(
     df_ = df_ / df_.loc["Norm", :] * 100
     f = make_filename("plot", praktijk, unit_test=unit_test, file_type=".png")
     plt_df(df_.iloc[1:, :], filename=f)
-    return f
+    return f, df

@@ -54,11 +54,3 @@ def make_find_mean_regio(regio: str, visitatie_uitslag: dict, filename: str):
 
     json.dump(result, open(filename, "w"))
     return result
-
-
-# def _format(x):
-#     if x == 1:
-#         return "1"
-#     else:
-#         return "{:.2f}".format(x)
-
