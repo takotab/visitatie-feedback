@@ -16,6 +16,7 @@ def send_mail(
     subject="test",
     text="text_test",
     files=None,
+    unit_test=False,
 ):
     assert isinstance(send_to, list)
 
@@ -35,11 +36,11 @@ def send_mail(
         # After the file is closed
         part["Content-Disposition"] = 'attachment; filename="%s"' % basename(f)
         msg.attach(part)
+    if not unit_test:
+        server = smtplib.SMTP_SSL("smtp.gmail.com", 465)
+        server.ehlo()
+        server.login(gmail_user, gmail_password)
+        server.sendmail(sent_from, send_to, msg.as_string())
+        server.close()
 
-    server = smtplib.SMTP_SSL("smtp.gmail.com", 465)
-    server.ehlo()
-    server.login(gmail_user, gmail_password)
-    server.sendmail(sent_from, send_to, msg.as_string())
-    server.close()
-
-    print("Email sent!")
+        print("Email sent!")

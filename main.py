@@ -40,6 +40,12 @@ def main(dir):
             result_r[item].append(key)
         else:
             result_r[item] = [key]
+        if key == "Oefentherapie Mensendieck Castricum":
+            visitatie.send_mail(
+                **visitatie.make_message(
+                    key, result_froms[key]["email"], html_f.replace(".html", ".pdf")
+                )
+            )
     for key in result_r:
         print(f"\n---{key}---\n")
         print("num of praktijken:", len(result_r[key]))

@@ -4,3 +4,4 @@ from .get_patients import get_patient_data, get_data_from_all_patients
 from .toetsen import *
 from .make_json import get_json_dct
 from .front import *
+from .email import *

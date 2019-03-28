@@ -7,5 +7,6 @@ def test_make_msg():
             "Divera",
             "takotabak+visitatie_test@gmail.com",
             "data_real/result_pdfs/results_Feedback visitatie Oefentherapie Mensendieck Castricum 2018.pdf",
-        )
+        ),
+        unit_test=True
     )

@@ -46,8 +46,9 @@ def make_htmlfile(praktijk: str, visitatie_uitslag: dict = None, unit_test=False
             dt.div("beschrijvings_table")
             dt.br()
             dt.div(
-                "In de onderstaande tabel zijn de voorwaarde voor de categorieën  te vinden. Om  een categorie te halen moet aan beide voorwaarden worden voldaan. De norm is niet gelijk aan 100%."
+                "In de onderstaande tabel zijn de voorwaarde voor de categorieen  te vinden. Om  een categorie te halen moet aan beide voorwaarden worden voldaan. De norm is niet gelijk aan 100%."
             )
+            dt.br()
             dt.div("norm_table")
             dt.br()
             dt.div("Uw catagorie is: " + visitatie_uitslag[praktijk]["Catagorie"])
