@@ -109,3 +109,4 @@ data_real/*
 results.csv
 results.json
 deploy_hints.txt
+visitatie/email/email_config.py
