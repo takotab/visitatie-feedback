@@ -1,6 +1,7 @@
 import os
 import pandas as pd
 import matplotlib.pyplot as plt
+import seaborn as sns
 
 
 def plt_df(df: pd.DataFrame, filename=None, mycolors=None):
@@ -18,6 +19,7 @@ def plt_df(df: pd.DataFrame, filename=None, mycolors=None):
         ]
         mycolors = mycolors[: df.shape[0] - 1] + ["tab:green"]
     assert mycolors[-1] == "tab:green"
+    # sns.catplot(x="sex", y="survived", hue="", kind="bar", data=df.T)
     df.T.plot(kind="bar", color=mycolors)
     plt.plot([0, 6], [100, 100], "k-", lw=2)
     plt.ylabel("% of norm")

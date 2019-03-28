@@ -1,4 +1,5 @@
 import os
+import json
 
 from visitatie import utils
 
@@ -10,9 +11,9 @@ class Form(object):
         self.door_de_juiste_bezocht = False
         self.patients = {"last_patient": "Unknown"}
         self.toetsen = {}
-        self.get_basic_info()
+        self.get_basic_info(path)
 
-    def get_basic_info(self):
+    def get_basic_info(self, path: str):
         self.praktijk_code = self.dct["Praktijkcode van de praktijk die bezocht wordt"]
         if self.praktijk_code == int(9_999_999):
             return self
@@ -21,6 +22,7 @@ class Form(object):
             setattr(self, key, item)
         self.naam = inschrijving_gegevens["naam"]
         self.email = inschrijving_gegevens["email"]
+        check_if_all_have_been(path, self.email)
         self.aantal_therapeuten = self.find_aantal_therapeuten()
         self.bezoekende_therapeut_code = self.dct["Therapeutcode bezoekende therapeut?"]
         self.bezoekende_praktijk = therapeut_2_praktijk_code(
@@ -127,3 +129,23 @@ def fix_length(str_lst: [str]):
 def find_plan_b_praktijk(praktijk_code, path):
     return utils.v_find(os.path.join(path, "gegevens.csv"), str(praktijk_code), 6, 5)
 
+
+def check_if_all_have_been(path: str, email: str):
+    f = os.path.join(path, "email_not_yet_done.json")
+    if not os.path.exists(f):
+        make_not_yet(f, path)
+    not_yet = json.load(open(f, "r"))
+    if email in not_yet["not_yet"]:
+        not_yet["not_yet"].remove(email)
+    not_yet["done"].append(email)
+    json.dump(not_yet, open(f, "w"))
+
+
+def make_not_yet(f_not_yet: str, path: str):
+    result = {"not_yet": []}
+    with open(os.path.join(path, "gegevens.csv"), "r") as f:
+        for line in f:
+            splitted_line = line.split(",")
+            result["not_yet"].append(splitted_line[9].replace("\n", ""))
+    result["done"] = []
+    json.dump(result, open(f_not_yet, "w"))

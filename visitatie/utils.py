@@ -42,3 +42,4 @@ def lines_from_csv_file(file):
                 yield line.replace("\n", "")
             except GeneratorExit:
                 pass
+    return
