@@ -29,14 +29,14 @@ def make_htmlfile(praktijk: str, visitatie_uitslag: dict = None, unit_test=False
             dt.div("Beste Rug-netwerker,")
             dt.br()
             dt.div(
-                "De visitatieronde is afgerond en de resultaten zijn verwerkt.  Hartelijk dank voor het meedoen."
-                + "Het geeft ons inzicht van wat er in de praktijken gebeurt en willen dit met jullie delen. Je krijgt feedback op praktijkniveau en je eigen regio."
+                "De visitatieronde is afgerond en de resultaten zijn verwerkt. Hartelijk dank voor het meedoen. "
+                + "Het geeft ons inzicht wat er gebeurt in de praktijken en willen dit met jullie delen. Je krijgt feedback op praktijkniveau en je eigen regio."
             )
             dt.br()
             dt.div("Er zijn drie categorieen: Groen, Oranje en Rood.")
             dt.br()
             dt.div(
-                "Er zijn duidelijke verschillen tussen praktijken. Daar kunnen logische verklaringen voor zijn. Het kan zijn dat je voor het eerst meedoet of dat er binnen de praktijk andere wisselingen hebben plaats gevonden.  Daarom vragen  we een reactie als de praktijk in het stoplicht model ROOD scoort."
+                "Er zijn duidelijke verschillen tussen praktijken. Daar kunnen logische verklaringen voor zijn. Het kan zijn dat je voor het eerst meedoet of dat er binnen de praktijk andere wisselingen hebben plaats gevonden. Daarom vragen we een reactie als de praktijk in het stoplicht model ROOD scoort."
             )
             dt.br()
             dt.div(
@@ -46,7 +46,7 @@ def make_htmlfile(praktijk: str, visitatie_uitslag: dict = None, unit_test=False
             dt.div("beschrijvings_table")
             dt.br()
             dt.div(
-                "In de onderstaande tabel zijn de voorwaarde voor de categorieen  te vinden. Om  een categorie te halen moet aan beide voorwaarden worden voldaan. De norm is niet gelijk aan 100%."
+                "In de onderstaande tabel zijn de voorwaarde voor de categorieen te vinden. Om een categorie te halen moet aan beide voorwaarden worden voldaan."
             )
             dt.br()
             dt.div("norm_table")
