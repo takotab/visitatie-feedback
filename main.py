@@ -20,6 +20,9 @@ args = parser.parse_args()
 
 
 def main(dir):
+    go = False
+    if os.path.isfile("q_a.csv"):
+        os.remove("q_a.csv")
     result_froms = {}
     result = {}
     for i in range(4, 66):
@@ -40,12 +43,18 @@ def main(dir):
             result_r[item].append(key)
         else:
             result_r[item] = [key]
-        if key == "Oefentherapie Mensendieck Castricum":
-            visitatie.send_mail(
-                **visitatie.make_message(
-                    key, result_froms[key]["email"], html_f.replace(".html", ".pdf")
-                )
-            )
+        # if go:  # or key == "Oefentherapie Mensendieck Schagen"
+        #     try:
+        #         visitatie.send_mail(
+        #             **visitatie.make_message(
+        #                 key,
+        #                 check_email(result_froms[key]["email"]),
+        #                 html_f.replace(".html", ".pdf"),
+        #             )
+        #         )
+        #     except:
+        #         print("Error in sending email.\nDid not sent email for:", key)
+        #         # go = True
     for key in result_r:
         print(f"\n---{key}---\n")
         print("num of praktijken:", len(result_r[key]))
@@ -55,6 +64,12 @@ def main(dir):
     df = pd.read_json("data_real/results_.json").T
     df.to_csv("results.csv")
     visitatie.all_results(result_froms)
+
+
+def check_email(email: str):
+    if "/" in email:
+        email = email.split("/")[0]
+    return email.replace(" ", "")
 
 
 if __name__ == "__main__":

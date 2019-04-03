@@ -11,10 +11,16 @@ def get_dossier_toets(form: Form):
 
 
 def get_stats(results: dict):
-    mean = Mean()
-    for _, item in results.items():
-        mean.add(item["Dossiertoets"])
-    return mean.mean()
+    q_mean = Mean("Dossiertoets")
+    dossiertoets_mean = Mean()
+    for _, patient_results in results.items():
+        for question, item in patient_results.items():
+            if question == "Dossiertoets":
+                dossiertoets_mean.add(item)
+            else:
+                q_mean.add(item, question)
+    q_mean.mean()
+    return dossiertoets_mean.mean()
 
 
 dossier_toets_q = [
@@ -38,8 +44,12 @@ def _dossier_toets(
 ):
     antworden = remove_additions(antworden, i)
     mean = Mean()
-    for item in [antworden[q] for q in dossier_toets_q]:
+    result = {}
+    for q, item in {q: antworden[q] for q in dossier_toets_q}.items():
         if "niet van toepassing" in str(item).lower() and niet_van_toepassing:
+            result[q] = None
             continue
         mean(negatief not in item)
-    return {"Dossiertoets": mean.mean()}
+        result[q] = int(negatief not in item)
+    result["Dossiertoets"] = mean.mean()
+    return result

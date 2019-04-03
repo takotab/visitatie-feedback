@@ -11,6 +11,7 @@ class Form(object):
         self.door_de_juiste_bezocht = False
         self.patients = {"last_patient": "Unknown"}
         self.toetsen = {}
+        self.q_answers = {}
         self.get_basic_info(path)
 
     def get_basic_info(self, path: str):
@@ -107,7 +108,7 @@ class Form(object):
         }
         return self.toetsen["dossier_per_therapeut"]
 
-    def add_toets(self, toets_results):
+    def add_toets(self, toets_results: dict):
         self.toetsen.update(toets_results)
 
 

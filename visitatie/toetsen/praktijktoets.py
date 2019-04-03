@@ -20,10 +20,9 @@ def praktijk_toets(form: Form, niet_van_toepassing=True, **kwargs):
 def _praktijk_toets(
     antworden: dict, negatief="niet aanwezig", niet_van_toepassing=False
 ):
-    mean = Mean()
-    for _, item in antworden.items():
+    mean = Mean("Praktijktoets")
+    for q, item in antworden.items():
         if "niet van toepassing" in str(item).lower() and niet_van_toepassing:
             continue
-        mean(negatief not in item)
-
+        mean(negatief not in item, q)
     return {"Praktijktoets": mean.mean()}

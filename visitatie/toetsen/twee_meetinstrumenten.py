@@ -13,7 +13,7 @@ meetinstrumenten_q = {
         "VAS-P max",
         "VAS-P max_end",
     ],
-    "PSK": ["PSK 1", "PSK 1_end", "PSK 2", "PSK 2_end", "PSK 3", "PSK 3_end"],
+    "PSK": ["PSK 1", "PSK 1_end"],
     "NRS": ["NRS", "NRS_end"],
     "QBPDS": ["QBPDS", "QBPDS_end"],
     "Anders": ["Welk ander meetinstrument gebruikt u?", "Anders", "Anders_end"],
