@@ -64,6 +64,7 @@ def main(dir):
     df = pd.read_json("data_real/results_.json").T
     df.to_csv("results.csv")
     visitatie.all_results(result_froms)
+    visitatie.only_regios_results(["nk"])
 
 
 def check_email(email: str):
