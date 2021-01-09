@@ -55,7 +55,10 @@ class Form(object):
     def find_aantal_therapeuten(self, email: str = None):
         if email is None:
             email = self.email
-
+        df = pd.read_csv(os.path.join(self.path, inschrijven_visitatie_csv))
+        df = df[df['E-mailadres'] == self.email]
+        assert df.shape[0] == 1 ,f"{df}, {self.email}"
+        return int(df['Aantal Rug-Netwerk therapeuten in de praktijk'].values)
         try:
             return int(
                 utils.v_find(
@@ -149,10 +152,7 @@ def check_if_all_have_been(path: str, email: str):
 
 
 def make_not_yet(f_not_yet: str, path: str):
-    result = {"not_yet": []}
-    with open(os.path.join(path, "gegevens.csv"), "r") as f:
-        for line in f:
-            splitted_line = line.split(",")
-            result["not_yet"].append(splitted_line[9].replace("\n", ""))
+    emails = list(pd.read_csv(os.path.join(path, "gegevens.csv"))['email'])
+    result = {"not_yet": emails}
     result["done"] = []
     json.dump(result, open(f_not_yet, "w"))
