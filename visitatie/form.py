@@ -1,7 +1,9 @@
 import os
 import json
-
+import pandas as pd
 from visitatie import utils
+
+inschrijven_visitatie_csv = "inschrijven_visitatie.csv"
 
 
 class Form(object):
@@ -38,15 +40,16 @@ class Form(object):
         if code is None:
             code = self.praktijk_code
         code = therapeut_2_praktijk_code(code)
-        splited_line = utils.v_find(os.path.join(self.path, "gegevens.csv"), code, 5)
-        print(splited_line)
-
-        assert "@" in str(splited_line[9]), str(splited_line[9])
+        df = pd.read_csv(os.path.join(self.path, "gegevens.csv"))
+        df = df[df["naam code"] == int(code)]
+        assert df.shape[0] == 1, code
+        dct = dict(df.iloc[0, :])
+        assert "@" in str(dct["email"]), str(dct["email"])
         return {
-            "naam": splited_line[7],
-            "email": splited_line[9],
-            "planned_b_praktijk": splited_line[6],
-            "regio": splited_line[8],
+            "naam": dct["praktijknaam"],
+            "email": dct["email"],
+            "planned_b_praktijk": dct["bezoekende prakijk"],
+            "regio": dct["regio"],
         }
 
     def find_aantal_therapeuten(self, email: str = None):
@@ -56,7 +59,7 @@ class Form(object):
         try:
             return int(
                 utils.v_find(
-                    os.path.join(self.path, "inschrijven_visitatie_2018.csv"),
+                    os.path.join(self.path, inschrijven_visitatie_csv),
                     email,
                     1,
                     3,
@@ -66,7 +69,7 @@ class Form(object):
             print(email)
             return int(
                 utils.v_find(
-                    os.path.join(self.path, "inschrijven_visitatie_2018.csv"),
+                    os.path.join(self.path, inschrijven_visitatie_csv),
                     email.split("@")[-1].split(".")[0],
                     1,
                     3,
@@ -119,7 +122,10 @@ def therapeut_2_praktijk_code(code):
     return code
 
 
-def fix_length(str_lst: [str]):
+from typing import List
+
+
+def fix_length(str_lst: List[str]):
     if len(str_lst) != 10:
         str_lst[7] = ",".join(str_lst[7:9])
         str_lst[8:] = str_lst[9:]
