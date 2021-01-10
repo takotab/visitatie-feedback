@@ -20,10 +20,14 @@ def v_find(
     path: str, match: str, match_col: int, return_col: int = None, _in: bool = False
 ):
     for line in lines_from_csv_file(path):
-        if match == str(line.split(",")[match_col]):
+        splitted_line = line.split(",")
+        assert (
+            len(splitted_line) > match_col
+        ), f"The list is: {splitted_line} but expacted {match_col} lengths"
+        if match == str(splitted_line[match_col]):
             return return_v_find(line, return_col)
         if _in:
-            if match.lower() in str(line.split(",")[match_col]).lower():
+            if match.lower() in str(splitted_line[match_col]).lower():
                 return return_v_find(line, return_col)
 
     raise FileNotFoundError(match)

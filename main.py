@@ -25,7 +25,8 @@ def main(dir):
         os.remove("q_a.csv")
     result_froms = {}
     result = {}
-    for i in range(4, 66):
+    for i in range(1, 66):
+        # print(i)
         a_form = visitatie.get_data(i=i, path=dir)
         if a_form.praktijk_code == 9_999_999:
             continue
