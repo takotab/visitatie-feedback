@@ -56,9 +56,9 @@ class Form(object):
         if email is None:
             email = self.email
         df = pd.read_csv(os.path.join(self.path, inschrijven_visitatie_csv))
-        df = df[df['E-mailadres'] == self.email]
-        assert df.shape[0] == 1 ,f"{df}, {self.email}"
-        return int(df['Aantal Rug-Netwerk therapeuten in de praktijk'].values)
+        df = df[df["E-mailadres"] == self.email]
+        assert df.shape[0] == 1, f"{df}, {self.email}"
+        return int(df["Aantal Rug-Netwerk therapeuten in de praktijk"].values)
         try:
             return int(
                 utils.v_find(
@@ -98,7 +98,11 @@ class Form(object):
             return list(self.dct.keys())
         result = {}
         for key in keys:
-            result[key] = self.dct[key]
+            if key in self.dct:
+                result[key] = self.dct[key]
+            else:
+                print(self.dct.keys())
+                raise KeyError(key)
         return result
 
     def _check_num_patients(self):
@@ -137,7 +141,10 @@ def fix_length(str_lst: List[str]):
 
 
 def find_plan_b_praktijk(praktijk_code, path):
-    return utils.v_find(os.path.join(path, "gegevens.csv"), str(praktijk_code), 6, 5)
+    df = pd.read_csv(os.path.join(path, "gegevens.csv"))
+    df = df[df["naam code"] == praktijk_code]
+    return df["bezoekende prakijk"].values
+    # return utils.v_find(, str(praktijk_code), 6, 5)
 
 
 def check_if_all_have_been(path: str, email: str):
@@ -152,7 +159,7 @@ def check_if_all_have_been(path: str, email: str):
 
 
 def make_not_yet(f_not_yet: str, path: str):
-    emails = list(pd.read_csv(os.path.join(path, "gegevens.csv"))['email'])
+    emails = list(pd.read_csv(os.path.join(path, "gegevens.csv"))["email"])
     result = {"not_yet": emails}
     result["done"] = []
     json.dump(result, open(f_not_yet, "w"))
