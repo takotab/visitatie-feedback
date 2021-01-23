@@ -4,6 +4,7 @@ import pandas as pd
 from visitatie import utils
 
 inschrijven_visitatie_csv = "inschrijven_visitatie.csv"
+gegevens_csv = lambda path: os.path.join(path, "gegevens.csv")
 
 
 class Form(object):
@@ -20,6 +21,7 @@ class Form(object):
         self.praktijk_code = self.dct["Praktijkcode van de praktijk die bezocht wordt"]
         if self.praktijk_code == int(9_999_999):
             return self
+        print("self.praktijk_code:", self.praktijk_code)
         inschrijving_gegevens = self.find_inschrijving_info_code()
         for key, item in inschrijving_gegevens.items():
             setattr(self, key, item)
@@ -40,7 +42,7 @@ class Form(object):
         if code is None:
             code = self.praktijk_code
         code = therapeut_2_praktijk_code(code)
-        df = pd.read_csv(os.path.join(self.path, "gegevens.csv"))
+        df = pd.read_csv(gegevens_csv(self.path))
         df = df[df["naam code"] == int(code)]
         assert df.shape[0] == 1, code
         dct = dict(df.iloc[0, :])
@@ -57,7 +59,7 @@ class Form(object):
             email = self.email
         df = pd.read_csv(os.path.join(self.path, inschrijven_visitatie_csv))
         df = df[df["E-mailadres"] == self.email]
-        assert df.shape[0] == 1, f"{df}, {self.email}"
+        assert df.shape[0] == 1, f"{df.shape}, {self.email}"
         return int(df["Aantal Rug-Netwerk therapeuten in de praktijk"].values)
         try:
             return int(
@@ -141,7 +143,7 @@ def fix_length(str_lst: List[str]):
 
 
 def find_plan_b_praktijk(praktijk_code, path):
-    df = pd.read_csv(os.path.join(path, "gegevens.csv"))
+    df = pd.read_csv(gegevens_csv(path))
     df = df[df["naam code"] == praktijk_code]
     return df["bezoekende prakijk"].values
     # return utils.v_find(, str(praktijk_code), 6, 5)
@@ -159,7 +161,7 @@ def check_if_all_have_been(path: str, email: str):
 
 
 def make_not_yet(f_not_yet: str, path: str):
-    emails = list(pd.read_csv(os.path.join(path, "gegevens.csv"))["email"])
+    emails = list(pd.read_csv(gegevens_csv(path))["email"])
     result = {"not_yet": emails}
     result["done"] = []
     json.dump(result, open(f_not_yet, "w"))
